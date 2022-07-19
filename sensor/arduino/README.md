@@ -2,15 +2,15 @@
 
 ## What you need
 
-    - Arduino Nano33 IoT board
+    - Arduino Nano RP2040 Connect IoT board
     - Grove IoT Starter Kit parts
-    - Personal computer with Go 1.13+ and TinyGo installed, and a serial port.
+    - Personal computer with Go 1.18+ and TinyGo installed, and a serial port.
 
 ## Installation
 
-### Go 1.13
+### Go 1.18
 
-If somehow you have not installed Go 1.13 on your computer already, you can download it here:
+If somehow you have not installed Go 1.18 on your computer already, you can download it here:
 
 https://golang.org/dl/
 
@@ -22,69 +22,15 @@ Follow the instructions here for your operating system:
 
 https://tinygo.org/getting-started/
 
-Once you have finished installing TinyGo itself, install the drivers needed for the 
-
 ### TinyGo drivers
 
-To install the various drivers and other code dependencies run these commands:
+The TinyGo drivers that let you connect to sensors, displays, and other external peripheral devices are located in the separate repository at
 
-```
-go get -u tinygo.org/x/drivers
-go get -u github.com/eclipse/paho.mqtt.golang
-go get -u github.com/conejoninja/tinydraw
-go get -u github.com/conejoninja/tinyfont
-```
-
-### Bossa
-
-In order to "flash", meaning to move the binary code from your computer to the Arduino, you must install the "bossac" command line utility which is part of BOSSA.
-
-#### Linux
-
-On Linux, install from source:
-
-```
-sudo apt install \
-  libwxgtk3.0-dev \
-  libreadline-dev
-git clone https://github.com/shumatech/BOSSA.git
-cd BOSSA
-make
-```
-
-Install Clang-8:
-
-```
-sudo apt install clang-8
-```
-
-#### macOS
-
-On macOS, you can install it via `brew cask install bossa` or download the installer from https://github.com/shumatech/BOSSA/releases/download/1.9.1/bossa-1.9.1.dmg
-
-One you have downloaded it, double click on the .dmg file to perform the installation.
-
-#### Windows
-
-- You must install the "BOSSA" flashing utility first. You can download it from https://github.com/shumatech/BOSSA/releases/download/1.9.1/bossa-x64-1.9.1.msi
-
-- During the installation, you should choose to put it into `c:\Program Files`
-
-- After the installation, you must add it to your PATH:
-
-    ```shell
-    set PATH=%PATH%;"c:\Program Files\BOSSA";
-    ```
-
-- Test that you have installed "BOSSA" correctly by running this command:
-
-    ```shell
-    bossac --help
-    ```
+The driver and the other code dependencies are already in the Go modules file in this directory, so they will be downloaded and installed automatically.
 
 ## Connecting the Arduino to your computer
 
-![Arduino Nano33 IoT](./images/nano33pinmap.jpg)
+![Arduino Nano RP2040 Connect](./images/nanorp2040pinmap.jpg)
 
 Plug the Arduino into your computer using a USB cable. There may be one provided in your starter kit.
 
@@ -118,7 +64,7 @@ Should produce entries like (you may have different numbers after
 Set the fully qualified path for the `tty` entry into an environment variable. We'll use this below in the macOS version of the steps.
 
 ```sh
-export NANO33_DEV_PATH=/dev/{YOUR TTY USBMODEM ID}
+export RP2040_PORT=/dev/{YOUR TTY USBMODEM ID}
 ```
 
 
@@ -132,17 +78,12 @@ This tests that you can compile and flash your Arduino with TinyGo code, by blin
 
 Run the following command to compile your code, and flash it onto the Arduino:
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step0/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step0/main.go
+tinygo flash -target nano-rp2040 ./step0/main.go
 ```
 
 Once the Arduino is flashed correctly, the built-in LED labeled "L" should start to turn on and off once per second. Now everything is setup correctly and you are ready to continue.
+
 
 ### step1.go - Blue LED
 
@@ -162,17 +103,12 @@ Once the Arduino is flashed correctly, the built-in LED labeled "L" should start
 
 Run the code.
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step1/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step1/main.go
+tinygo flash -target nano-rp2040 ./step1/main.go
 ```
 
 You should see the blue LED blink.
+
 
 ### step2.go - Blue LED, Button
 
@@ -188,17 +124,12 @@ You should see the blue LED blink.
 
 Run the code.
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step2/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step2/main.go
+tinygo flash -target nano-rp2040 ./step2/main.go
 ```
 
 When you press the button, the blue LED should turn on.
+
 
 ### step3.go - Blue LED, Button, Green LED
 
@@ -214,14 +145,8 @@ When you press the button, the blue LED should turn on.
 
 Run the code.
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step3/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step3/main.go
+tinygo flash -target nano-rp2040 ./step3/main.go
 ```
 
 The green LED should light up. When you press the button, the blue LED should turn on, and the green LED should turn off. When you release the button, the blue LED should turn off, and the green LED should turn on again.
@@ -248,17 +173,12 @@ The green LED should light up. When you press the button, the blue LED should tu
 
 Run the code.
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step4/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step4/main.go
+tinygo flash -target nano-rp2040 ./step4/main.go
 ```
 
 When you touch the touch sensor, the buzzer should emit a noise.
+
 
 ### step5.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial
 
@@ -272,17 +192,12 @@ When you touch the touch sensor, the buzzer should emit a noise.
 
 - Connect the yellow male end of the Grove cable to pin A0 on the Arduino.
 
-#### Linux
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step5/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step5/main.go
+tinygo flash -target nano-rp2040 ./step5/main.go
 ```
 
 Adjusting the dial sensor should control the brightness of the green LED.
+
 
 ### step6.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial, OLED
 
@@ -296,21 +211,13 @@ Adjusting the dial sensor should control the brightness of the green LED.
 
 - Connect a jumper wire from the "SDA" pin on the breadboard next to the OLED display, to the Arduino Nano33's A4 pin.
 
-#### Linux
 
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step6/main.go
+tinygo flash -target nano-rp2040 ./step6/main.go
 ```
 
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step6/main.go
-```
+The dial should now case the OLED display to its current position. The OLED should also have two empty circles that will light up when you press the Button to light up the Blue LED and when you press the touch sensor respectively.
 
-The dial should now case the OLED display to its current position. The OLED
-should also have two empty circles that will light up when you press the
-Button to light up the Blue LED and when you press the touch sensor
-respectively.
 
 ### step7.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial, MQTT
 
@@ -318,15 +225,8 @@ respectively.
 
 In this step we will connect to a machine to machine messaging server using the MQTT protocol. No additional hardware is required for this step.
 
-#### Linux
-
 ```
-tinygo flash -target arduino-nano33 ./sensor/arduino/step7/main.go
-```
-
-#### macOS
-```
-tinygo flash -target arduino-nano33 -port=$NANO33_DEV_PATH ./sensor/arduino/step7/main.go
+tinygo flash -target nano-rp2040 ./step7/main.go
 ```
 
 How to tell if it is working...
