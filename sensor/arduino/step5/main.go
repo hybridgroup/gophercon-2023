@@ -7,37 +7,49 @@ import (
 	"tinygo.org/x/drivers/buzzer"
 )
 
+var (
+	blue = machine.D12
+	green = machine.D10
+	button = machine.D11
+	touch = machine.D9
+	bzrPin = machine.D8
+
+	dial = machine.ADC{machine.ADC0}
+	pwm = machine.PWM2 // Pin D10 corresponds to PWM2.
+)
+
 func main() {
-	machine.InitADC()
-	machine.InitPWM()
-
-	blue := machine.D12
 	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	green := machine.PWM{machine.D10}
-	green.Configure()
-
-	button := machine.D11
-	button.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	touch := machine.D9
-	touch.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	bzrPin := machine.D8
+	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	err := pwm.Configure(machine.PWMConfig{
+		Period: 16384e3, // 16.384ms
+	})
+	if err != nil {
+		println("failed to configure PWM")
+		return
+	}
+
+	greenPwm, err := pwm.Channel(green)
+	if err != nil {
+		println("failed to configure PWM channel for pin D10")
+		return
+	}
 
 	bzr := buzzer.New(bzrPin)
 
-	dial := machine.ADC{machine.A0}
-	dial.Configure()
+	machine.InitADC()
+	dial.Configure(machine.ADCConfig{})
 
 	for {
-		green.Set(dial.Get())
+		pwm.Set(greenPwm, uint32(dial.Get()))
 
-		if !button.Get() {
-			blue.Low()
-		} else {
+		if button.Get() {
 			blue.High()
+		} else {
+			blue.Low()
 		}
 
 		if touch.Get() {

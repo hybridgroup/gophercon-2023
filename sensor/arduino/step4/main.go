@@ -7,31 +7,30 @@ import (
 	"tinygo.org/x/drivers/buzzer"
 )
 
+var (
+	blue = machine.D12
+	green = machine.D10
+	button = machine.D11
+	touch = machine.D9
+	bzrPin = machine.D8
+)
+
 func main() {
-	blue := machine.D12
 	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	green := machine.D10
 	green.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	button := machine.D11
-	button.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	touch := machine.D9
-	touch.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	bzrPin := machine.D8
+	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	bzr := buzzer.New(bzrPin)
 
 	for {
-		if !button.Get() {
-			blue.Low()
-			green.High()
-		} else {
+		if button.Get() {
 			blue.High()
 			green.Low()
+		} else {
+			blue.Low()
+			green.High()
 		}
 
 		if touch.Get() {

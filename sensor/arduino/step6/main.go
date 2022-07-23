@@ -6,60 +6,44 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/conejoninja/tinydraw"
-	"github.com/conejoninja/tinyfont"
-
-	// comes from "github.com/conejoninja/tinyfont/freemono"
-	freemono "../fonts"
+	"tinygo.org/x/tinydraw"
+	"tinygo.org/x/tinyfont"
+	"tinygo.org/x/tinyfont/freemono"
 	"tinygo.org/x/drivers/buzzer"
 	"tinygo.org/x/drivers/ssd1306"
 )
 
 var (
+	blue = machine.D12
+	green = machine.D10
+	button = machine.D11
+	touch = machine.D9
+	bzrPin = machine.D8
+
+	bzr buzzer.Device
+	dial = machine.ADC{machine.ADC0}
+	pwm = machine.PWM2 // PWM2 corresponds to Pin D10.
+	greenPwm uint8
+
 	dialValue  uint16
 	buttonPush bool
 	touchPush  bool
 )
 
 func main() {
-	machine.I2C0.Configure(machine.I2CConfig{
-		Frequency: machine.TWI_FREQ_400KHZ,
-	})
+	initDevices()
 
 	go handleDisplay()
 
-	machine.InitADC()
-	machine.InitPWM()
-
-	blue := machine.D12
-	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	green := machine.PWM{machine.D10}
-	green.Configure()
-
-	button := machine.D11
-	button.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	touch := machine.D9
-	touch.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	bzrPin := machine.D8
-	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	bzr := buzzer.New(bzrPin)
-
-	dial := machine.ADC{machine.A0}
-	dial.Configure()
-
 	for {
 		dialValue = dial.Get()
-		green.Set(dialValue)
+		pwm.Set(greenPwm, uint32(dialValue))
 
 		buttonPush = button.Get()
-		if !buttonPush {
-			blue.Low()
-		} else {
+		if buttonPush {
 			blue.High()
+		} else {
+			blue.Low()
 		}
 
 		touchPush = touch.Get()
@@ -73,7 +57,31 @@ func main() {
 	}
 }
 
+func initDevices() {
+	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	err := pwm.Configure(machine.PWMConfig{
+		Period: 16384e3, // 16.384ms
+	})
+	if err != nil {
+		println("failed to configure PWM")
+		return
+	}
+
+	machine.InitADC()
+	dial.Configure(machine.ADCConfig{})
+
+	bzr = buzzer.New(bzrPin)
+}
+
 func handleDisplay() {
+	machine.I2C0.Configure(machine.I2CConfig{
+		Frequency: machine.TWI_FREQ_400KHZ,
+	})
+
 	display := ssd1306.NewI2C(machine.I2C0)
 	display.Configure(ssd1306.Config{
 		Address: ssd1306.Address_128_32,
@@ -89,7 +97,7 @@ func handleDisplay() {
 		display.ClearBuffer()
 
 		val := strconv.Itoa(int(dialValue))
-		msg := []byte("dial: " + val) // + x)
+		msg := "dial: " + val
 		tinyfont.WriteLine(&display, &freemono.Bold9pt7b, 10, 20, msg, black)
 
 		var radius int16 = 4

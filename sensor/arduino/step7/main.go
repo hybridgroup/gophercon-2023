@@ -2,105 +2,96 @@ package main
 
 import (
 	"machine"
+	"image/color"
 	"math/rand"
+	"strconv"
 	"time"
 
-	// comes from "github.com/conejoninja/tinyfont/freemono"
-
+	"tinygo.org/x/tinydraw"
+	"tinygo.org/x/tinyfont"
+	"tinygo.org/x/tinyfont/freemono"
 	"tinygo.org/x/drivers/buzzer"
-	"tinygo.org/x/drivers/espat"
-	"tinygo.org/x/drivers/espat/mqtt"
+	"tinygo.org/x/drivers/ssd1306"
+
+	"tinygo.org/x/drivers/wifinina"
+	"tinygo.org/x/drivers/net/mqtt"
 )
 
 var (
+	blue = machine.D12
+	green = machine.D10
+	button = machine.D11
+	touch = machine.D9
+	bzrPin = machine.D8
+
+	bzr buzzer.Device
+	dial = machine.ADC{machine.ADC0}
+	pwm = machine.PWM2 // PWM2 corresponds to Pin D10.
+	greenPwm uint8
+
 	dialValue  uint16
 	buttonPush bool
 	touchPush  bool
+)
 
-	uart = machine.UART1
-	tx   = machine.PA22
-	rx   = machine.PA23
+var (
+	// these are the default pins for the Arduino Nano33 IoT.
+	spi = machine.NINA_SPI
 
-	adaptor *espat.Device
+	// this is the ESP chip that has the WIFININA firmware flashed on it
+	adaptor *wifinina.Device
 	topic   = "tinygo"
 )
 
 // access point info. Change this to match your WiFi connection information.
-const ssid = "GDG 2019"
-const pass = "gdgsummit"
+var (
+	ssid = "SSID"
+	pass = "PASS"
+)
 
 // IP address of the MQTT broker to use. Replace with your own info, if so desired.
 const server = "tcp://test.mosquitto.org:1883"
 
 func main() {
-	uart.Configure(machine.UARTConfig{TX: tx, RX: rx})
-	rand.Seed(time.Now().UnixNano())
+	initDevices()
 
-	machine.I2C0.Configure(machine.I2CConfig{
-		Frequency: machine.TWI_FREQ_400KHZ,
+	// Configure SPI for 8Mhz, Mode 0, MSB First
+	spi.Configure(machine.SPIConfig{
+		Frequency: 8 * 1e6,
+		SDO:       machine.NINA_SDO,
+		SDI:       machine.NINA_SDI,
+		SCK:       machine.NINA_SCK,
 	})
 
-	machine.InitADC()
-	machine.InitPWM()
-
-	blue := machine.D12
-	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	green := machine.PWM{machine.D10}
-	green.Configure()
-
-	button := machine.D11
-	button.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	touch := machine.D9
-	touch.Configure(machine.PinConfig{Mode: machine.PinInput})
-
-	bzrPin := machine.D8
-	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
-	bzr := buzzer.New(bzrPin)
-
-	dial := machine.ADC{machine.A0}
-	dial.Configure()
-
 	// Init esp8266/esp32
-	adaptor = espat.New(uart)
+	adaptor = wifinina.New(spi,
+		machine.NINA_CS,
+		machine.NINA_ACK,
+		machine.NINA_GPIO0,
+		machine.NINA_RESETN)
 	adaptor.Configure()
 
-	// first check if connected
-	if connectToESP() {
-		blue.High()
-		println("Connected to wifi adaptor.")
-		adaptor.Echo(false)
+	connectToAP()
 
-		blue.Low()
-		connectToAP()
-		blue.High()
-	} else {
-		println("")
-		failMessage("Unable to connect to wifi adaptor.")
-		return
-	}
-
-	opts := mqtt.NewClientOptions(adaptor)
+	opts := mqtt.NewClientOptions()
 	opts.AddBroker(server).SetClientID("tinygo-client-" + randomString(10))
 
-	blue.Low()
 	println("Connectng to MQTT...")
 	cl := mqtt.NewClient(opts)
 	if token := cl.Connect(); token.Wait() && token.Error() != nil {
 		failMessage(token.Error().Error())
 	}
 
+	go handleDisplay()
+
 	for {
 		dialValue = dial.Get()
-		green.Set(dialValue)
+		pwm.Set(greenPwm, uint32(dialValue))
 
 		buttonPush = button.Get()
-		if !buttonPush {
-			blue.Low()
-		} else {
+		if buttonPush {
 			blue.High()
+
 			println("Publishing MQTT message...")
 			data := []byte("{\"e\":[{ \"n\":\"hello\", \"sv\":\"world\" }]}")
 			token := cl.Publish(topic, 0, false, data)
@@ -108,6 +99,8 @@ func main() {
 			if token.Error() != nil {
 				println(token.Error().Error())
 			}
+		} else {
+			blue.Low()
 		}
 
 		touchPush = touch.Get()
@@ -117,37 +110,91 @@ func main() {
 			bzr.Off()
 		}
 
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * 10)
 	}
-
-	// Right now this code is only reached when there is an error. Need a way to trigger clean exit.
-	println("Disconnecting MQTT...")
-	cl.Disconnect(100)
-
-	println("Done.")
 }
 
-// connect to ESP8266/ESP32
-func connectToESP() bool {
-	for i := 0; i < 5; i++ {
-		println("Connecting to wifi adaptor...")
-		if adaptor.Connected() {
-			return true
-		}
-		time.Sleep(1 * time.Second)
+func initDevices() {
+	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	err := pwm.Configure(machine.PWMConfig{
+		Period: 16384e3, // 16.384ms
+	})
+	if err != nil {
+		println("failed to configure PWM")
+		return
 	}
-	return false
+
+	machine.InitADC()
+	dial.Configure(machine.ADCConfig{})
+
+	bzr = buzzer.New(bzrPin)
+}
+
+func handleDisplay() {
+	machine.I2C0.Configure(machine.I2CConfig{
+		Frequency: machine.TWI_FREQ_400KHZ,
+	})
+
+	display := ssd1306.NewI2C(machine.I2C0)
+	display.Configure(ssd1306.Config{
+		Address: ssd1306.Address_128_32,
+		Width:   128,
+		Height:  32,
+	})
+
+	display.ClearDisplay()
+
+	black := color.RGBA{1, 1, 1, 255}
+
+	for {
+		display.ClearBuffer()
+
+		val := strconv.Itoa(int(dialValue))
+		msg := "dial: " + val
+		tinyfont.WriteLine(&display, &freemono.Bold9pt7b, 10, 20, msg, black)
+
+		var radius int16 = 4
+		if buttonPush {
+			tinydraw.FilledCircle(&display, 16+32*0, 32-radius-1, radius, black)
+		} else {
+			tinydraw.Circle(&display, 16+32*0, 32-radius-1, radius, black)
+		}
+		if touchPush {
+			tinydraw.FilledCircle(&display, 16+32*1, 32-radius-1, radius, black)
+		} else {
+			tinydraw.Circle(&display, 16+32*1, 32-radius-1, radius, black)
+		}
+
+		display.Display()
+
+		time.Sleep(100 * time.Millisecond)
+	}
 }
 
 // connect to access point
 func connectToAP() {
-	println("Connecting to wifi network...")
-
-	adaptor.SetWifiMode(espat.WifiModeClient)
-	adaptor.ConnectToAP(ssid, pass, 10)
+	time.Sleep(2 * time.Second)
+	println("Connecting to " + ssid)
+	err := adaptor.ConnectToAccessPoint(ssid, pass, 10*time.Second)
+	if err != nil { // error connecting to AP
+		for {
+			println(err)
+			time.Sleep(1 * time.Second)
+		}
+	}
 
 	println("Connected.")
-	println(adaptor.GetClientIP())
+
+	ip, _, _, err := adaptor.GetIP()
+	for ; err != nil; ip, _, _, err = adaptor.GetIP() {
+		println(err.Error())
+		time.Sleep(1 * time.Second)
+	}
+	println(ip.String())
 }
 
 // Returns an int >= min, < max

@@ -30,7 +30,7 @@ The driver and the other code dependencies are already in the Go modules file in
 
 ## Connecting the Arduino to your computer
 
-![Arduino Nano RP2040 Connect](./images/nanorp2040pinmap.jpg)
+<img src="https://docs.arduino.cc/static/8b9e4e17c1e1afa836057c5ba87c27c9/2f891/pinout.png" alt="Arduino Nano RP2040 Connect" width="600"/>
 
 Plug the Arduino into your computer using a USB cable. There may be one provided in your starter kit.
 
@@ -46,35 +46,11 @@ Let's get started!
 
 ## Code
 
-### IMPORTANT! macOS-specific required steps (Linux users can ignore)
-The Linux and macOS device subsystems have subtle differences. **In order to talk to the Arduino board on a Mac**, you need to discover how macOS system has named it. Plug it in and follow these commands:
-
-```
-ls /dev | grep usb
-```
-
-Should produce entries like (you may have different numbers after
-`usbmodem`):
-
-```
-/dev/cu.usbmodem141201
-/dev/tty.usbmodem141201
-```
-
-Set the fully qualified path for the `tty` entry into an environment variable. We'll use this below in the macOS version of the steps.
-
-```sh
-export RP2040_PORT=/dev/{YOUR TTY USBMODEM ID}
-```
-
-
 ### step0.go - Built-in LED
 
 ![Arduino](./images/step0.png)
 
 This tests that you can compile and flash your Arduino with TinyGo code, by blinking the built-in LED.
-
-- Click on the "RST" button two times to put the Arduino into bootloader mode so you can load your own code onto it. The LED labeled "L" should remain lit to indicate that the Arduino is ready to receive your code.
 
 Run the following command to compile your code, and flash it onto the Arduino:
 
@@ -82,7 +58,7 @@ Run the following command to compile your code, and flash it onto the Arduino:
 tinygo flash -target nano-rp2040 ./step0/main.go
 ```
 
-Once the Arduino is flashed correctly, the built-in LED labeled "L" should start to turn on and off once per second. Now everything is setup correctly and you are ready to continue.
+Once the Arduino is flashed correctly, the built-in amber LED to the right of the USB jack should start to turn on and off once per second. Now everything is setup correctly and you are ready to continue.
 
 
 ### step1.go - Blue LED
