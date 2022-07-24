@@ -201,8 +201,10 @@ The dial should now case the OLED display to its current position. The OLED shou
 
 In this step we will connect to a machine to machine messaging server using the MQTT protocol. No additional hardware is required for this step.
 
+Substitute the correct values for your WiFi setup in the following command:
+
 ```
-tinygo flash -target nano-rp2040 ./step7/main.go
+tinygo flash -target nano-rp2040 -ldflags="-X main.ssid=MYSSID -X main.pass=MYPASS" ./step7/main.go
 ```
 
 How to tell if it is working...

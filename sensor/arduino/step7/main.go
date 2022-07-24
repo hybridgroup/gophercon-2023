@@ -45,10 +45,10 @@ var (
 	mqttClient mqtt.Client
 )
 
-// access point info. Change this to match your WiFi connection information.
+// access point info. 
 var (
-	ssid = "rems"
-	pass = "Salvador1"
+	ssid string
+	pass string
 )
 
 // IP address of the MQTT broker to use. Replace with your own info, if so desired.
