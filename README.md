@@ -14,9 +14,9 @@ In additional to these drones to be to be coded/flown, we will also have Dualsho
 
 ## TinyGo IoT sensors
 
-We have some Arduino Nano33 IoT microcontroller boards each person to use for the activity.
+We have some Arduino Nano RP2040 Connect IoT microcontroller boards each person to use for the activity.
 
-https://store.arduino.cc/nano-33-iot
+https://store.arduino.cc/collections/boards/products/arduino-nano-rp2040-connect
 
 These can be programmed using TinyGo.
 
