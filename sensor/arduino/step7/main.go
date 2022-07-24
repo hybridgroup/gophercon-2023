@@ -41,46 +41,26 @@ var (
 	// this is the ESP chip that has the WIFININA firmware flashed on it
 	adaptor *wifinina.Device
 	topic   = "tinygo"
+
+	mqttClient mqtt.Client
 )
 
 // access point info. Change this to match your WiFi connection information.
 var (
-	ssid = "SSID"
-	pass = "PASS"
+	ssid = "rems"
+	pass = "Salvador1"
 )
 
 // IP address of the MQTT broker to use. Replace with your own info, if so desired.
-const server = "tcp://test.mosquitto.org:1883"
+var server = "tcp://test.mosquitto.org:1883"
 
 func main() {
 	initDevices()
 
-	// Configure SPI for 8Mhz, Mode 0, MSB First
-	spi.Configure(machine.SPIConfig{
-		Frequency: 8 * 1e6,
-		SDO:       machine.NINA_SDO,
-		SDI:       machine.NINA_SDI,
-		SCK:       machine.NINA_SCK,
-	})
-
-	// Init esp8266/esp32
-	adaptor = wifinina.New(spi,
-		machine.NINA_CS,
-		machine.NINA_ACK,
-		machine.NINA_GPIO0,
-		machine.NINA_RESETN)
-	adaptor.Configure()
-
+	initAdaptor()
 	connectToAP()
 
-	opts := mqtt.NewClientOptions()
-	opts.AddBroker(server).SetClientID("tinygo-client-" + randomString(10))
-
-	println("Connectng to MQTT...")
-	cl := mqtt.NewClient(opts)
-	if token := cl.Connect(); token.Wait() && token.Error() != nil {
-		failMessage(token.Error().Error())
-	}
+	connectToMQTT()
 
 	go handleDisplay()
 
@@ -94,7 +74,7 @@ func main() {
 
 			println("Publishing MQTT message...")
 			data := []byte("{\"e\":[{ \"n\":\"hello\", \"sv\":\"world\" }]}")
-			token := cl.Publish(topic, 0, false, data)
+			token := mqttClient.Publish(topic, 0, false, data)
 			token.Wait()
 			if token.Error() != nil {
 				println(token.Error().Error())
@@ -125,6 +105,11 @@ func initDevices() {
 	})
 	if err != nil {
 		println("failed to configure PWM")
+		return
+	}
+	greenPwm, err = pwm.Channel(green)
+	if err != nil {
+		println("failed to configure PWM channel")
 		return
 	}
 
@@ -175,6 +160,24 @@ func handleDisplay() {
 	}
 }
 
+func initAdaptor() {
+	// Configure SPI for 8Mhz, Mode 0, MSB First
+	spi.Configure(machine.SPIConfig{
+		Frequency: 8 * 1e6,
+		SDO:       machine.NINA_SDO,
+		SDI:       machine.NINA_SDI,
+		SCK:       machine.NINA_SCK,
+	})
+
+	// Init esp32
+	adaptor = wifinina.New(spi,
+		machine.NINA_CS,
+		machine.NINA_ACK,
+		machine.NINA_GPIO0,
+		machine.NINA_RESETN)
+	adaptor.Configure()
+}
+
 // connect to access point
 func connectToAP() {
 	time.Sleep(2 * time.Second)
@@ -195,6 +198,17 @@ func connectToAP() {
 		time.Sleep(1 * time.Second)
 	}
 	println(ip.String())
+}
+
+func connectToMQTT()  {
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker(server).SetClientID("tinygo-client-" + randomString(10))
+
+	println("Connectng to MQTT...")
+	mqttClient = mqtt.NewClient(opts)
+	if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
+		failMessage(token.Error().Error())
+	}
 }
 
 // Returns an int >= min, < max

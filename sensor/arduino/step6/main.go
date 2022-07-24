@@ -70,6 +70,11 @@ func initDevices() {
 		println("failed to configure PWM")
 		return
 	}
+	greenPwm, err = pwm.Channel(green)
+	if err != nil {
+		println("failed to configure PWM channel")
+		return
+	}
 
 	machine.InitADC()
 	dial.Configure(machine.ADCConfig{})
