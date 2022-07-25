@@ -24,19 +24,19 @@ https://tinygo.org/getting-started/
 
 ### TinyGo drivers
 
-The TinyGo drivers that let you connect to sensors, displays, and other external peripheral devices are located in the separate repository at
+The TinyGo drivers that let you connect to sensors, displays, and other external peripheral devices are located in the separate repository at https://github.com/tinygo-org/drivers
 
-The driver and the other code dependencies are already in the Go modules file in this directory, so they will be downloaded and installed automatically.
+The drivers and the other code dependencies are already in the Go modules file in this directory, so they will be downloaded and installed automatically.
 
-## Connecting the Arduino to your computer
+## Connecting the Arduino Nano RP2040 Connect to your computer
 
 <img src="https://docs.arduino.cc/static/8b9e4e17c1e1afa836057c5ba87c27c9/2f891/pinout.png" alt="Arduino Nano RP2040 Connect" width="600"/>
 
-Plug the Arduino into your computer using a USB cable. There may be one provided in your starter kit.
+Plug the Arduino Nano RP2040 Connect into your computer using a USB cable. There may be one provided in your starter kit.
 
 ## Running the code
 
-The TinyGo programs will run directly on the Arduino's microcontoller. The procedure is basically:
+The TinyGo programs will run directly on the Arduino microcontoller. The procedure is basically:
 
 - Edit your TinyGo program.
 - Compile and flash it to your Arduino.
@@ -65,6 +65,8 @@ Once the Arduino is flashed correctly, the built-in amber LED to the right of th
 
 ![Arduino](./images/step1.png)
 
+Now lets do the same thing, but instead of using the built-in LED we will use a separate LED that we will connect from the parts kit.
+
 - Connect one of the "Ground" pins on the Arduino to the breadboard's ground rail (-) using a black or brown jumper cable.
 
 - Connect the "3.3V" pin on the Arduino to the breadboard's power rail (+) using a red jumper cable.
@@ -88,6 +90,8 @@ You should see the blue LED blink.
 
 ### step2.go - Blue LED, Button
 
+Next, we will attach a push button. The button will control the LED we added in the previous step. When you push the button, the LED will turn on. When you release the button, it will turn off.
+
 ![Arduino](./images/step2.png)
 
 - Plug the Grove Button into a provided cable with the Grove connector on one end, and the male jumpers on the other.
@@ -109,6 +113,8 @@ When you press the button, the blue LED should turn on.
 
 ### step3.go - Blue LED, Button, Green LED
 
+Now we will add a second LED, that will will also control with the same push button. One LED will be on with the button is pushed, and the other will be on when the button is released.
+
 ![Arduino](./images/step3.png)
 
 - Plug the Grove green LED into one of the provided cable with the Grove connector on one end, and the male jumpers on the other.
@@ -128,6 +134,8 @@ tinygo flash -target nano-rp2040 ./step3/main.go
 The green LED should light up. When you press the button, the blue LED should turn on, and the green LED should turn off. When you release the button, the blue LED should turn off, and the green LED should turn on again.
 
 ### step4.go - Blue LED, Button, Green LED, Buzzer, Touch
+
+In this step we will add 2 new devices. The first one is a capacitive touch sensor. It essentially acts like a button, but you only need to touch it to activate it. The second is a small piezoelectric buzzer. When current is sent to the buzzer, it makes a noise.
 
 ![Arduino](./images/step4.png)
 
@@ -158,6 +166,12 @@ When you touch the touch sensor, the buzzer should emit a noise.
 
 ### step5.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial
 
+The next device we will ad is a rotary dial. The rotary dial is an analog device. The amount of voltage that is allowed to pass through it is based on how far you turn the dial. 
+
+In order to read whatever voltage is going thru the dial, we will need to use an [Analog to Digital Converter (ADC)](https://en.wikipedia.org/wiki/Analog-to-digital_converter). The Arduino Nano RP 2040 connect has several ADC onboard for us to use.
+
+We will use this to control the brightness of the green LED. To do this, we will need to switch from just a digital on or off signal, to use [Pulse Width Modulation (PWM)](https://en.wikipedia.org/wiki/Pulse-width_modulation) to make the LED brighter or dimmer.
+
 ![Arduino](./images/step5.png)
 
 - Plug the Grove dial (Rotary Angle Sensor) into one of the provided cables with the Grove connector on one end, and the male jumpers on the other.
@@ -175,7 +189,9 @@ tinygo flash -target nano-rp2040 ./step5/main.go
 Adjusting the dial sensor should control the brightness of the green LED.
 
 
-### step6.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial, OLED
+### step6.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial, OLED display
+
+Now we will add a OLED display to show the state of the buttons and dial. We will control this display using an [I2C interface](https://en.wikipedia.org/wiki/I%C2%B2C).
 
 ![Arduino](./images/step6.png)
 
@@ -183,23 +199,26 @@ Adjusting the dial sensor should control the brightness of the green LED.
 
 - Connect a jumper wire from the "VCC" pin on the breadboard next to the OLED display, to the breadboard's top right (+) set of pins.
 
+- Connect a jumper wire from the "SDA" pin on the breadboard next to the OLED display, to the Arduino Nano RP2040 A4 pin.
+
 - Connect a jumper wire from the "SCL" pin on the breadboard next to the OLED display, to the Arduino Nano RP2040 A5 pin.
 
-- Connect a jumper wire from the "SDA" pin on the breadboard next to the OLED display, to the Arduino Nano RP2040 A4 pin.
+
+We have 2 TinyGo packages to make it easier to use displays. The TinyFont package renders fonts to any of the displays in the TinyGo drivers repo. The TinyDraw package has a number of drawing primitives like circles, lines, and triangles.
 
 
 ```
 tinygo flash -target nano-rp2040 ./step6/main.go
 ```
 
-The dial should now case the OLED display to its current position. The OLED should also have two empty circles that will light up when you press the Button to light up the Blue LED and when you press the touch sensor respectively.
+The dial should now cause the OLED display to show its current position. The OLED should also have two empty circles that will light up when you press the Button to light up the Blue LED and when you press the touch sensor respectively.
 
 
 ### step7.go - Blue LED, Button, Green LED, Buzzer, Touch, Dial, MQTT
 
 ![Arduino](./images/step6.png)
 
-In this step we will connect to a machine to machine messaging server using the MQTT protocol. No additional hardware is required for this step.
+In this step we will connect to a machine to machine messaging server using the [MQTT machine to machine messaging protocol](https://en.wikipedia.org/wiki/MQTT). No additional hardware is required for this step.
 
 Substitute the correct values for your WiFi setup in the following command:
 
@@ -213,4 +232,4 @@ How to tell if it is working...
 mosquitto_sub -h 'test.mosquitto.org' -t 'tinygo'
 ```
 
-When you run this command, you should be able to see the messages appear from your own machine when you press the button.
+When you run this command, you should be able to see the messages appear. These are being sent from your own machine to an MQTT broker provided by the Eclipse Foundation and running on a cloud server that they provide.
