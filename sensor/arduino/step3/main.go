@@ -25,6 +25,6 @@ func main() {
 			green.High()
 		}
 
-		time.Sleep(time.Millisecond * 10)
+		time.Sleep(time.Millisecond * 100)
 	}
 }

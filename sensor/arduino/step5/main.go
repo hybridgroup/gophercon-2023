@@ -38,7 +38,7 @@ func main() {
 			bzr.Off()
 		}
 
-		time.Sleep(time.Millisecond * 10)
+		time.Sleep(time.Millisecond * 100)
 	}
 }
 

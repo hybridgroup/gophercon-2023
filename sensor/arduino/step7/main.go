@@ -1,32 +1,32 @@
 package main
 
 import (
-	"machine"
 	"image/color"
+	"machine"
 	"math/rand"
 	"strconv"
 	"time"
 
+	"tinygo.org/x/drivers/buzzer"
+	"tinygo.org/x/drivers/ssd1306"
 	"tinygo.org/x/tinydraw"
 	"tinygo.org/x/tinyfont"
 	"tinygo.org/x/tinyfont/freemono"
-	"tinygo.org/x/drivers/buzzer"
-	"tinygo.org/x/drivers/ssd1306"
 
-	"tinygo.org/x/drivers/wifinina"
 	"tinygo.org/x/drivers/net/mqtt"
+	"tinygo.org/x/drivers/wifinina"
 )
 
 var (
-	blue = machine.D12
-	green = machine.D10
+	blue   = machine.D12
+	green  = machine.D10
 	button = machine.D11
-	touch = machine.D9
+	touch  = machine.D9
 	bzrPin = machine.D8
 
-	bzr buzzer.Device
-	dial = machine.ADC{machine.ADC0}
-	pwm = machine.PWM2 // PWM2 corresponds to Pin D10.
+	bzr      buzzer.Device
+	dial     = machine.ADC{machine.ADC0}
+	pwm      = machine.PWM2 // PWM2 corresponds to Pin D10.
 	greenPwm uint8
 
 	dialValue  uint16
@@ -45,7 +45,7 @@ var (
 	mqttClient mqtt.Client
 )
 
-// access point info. 
+// access point info.
 var (
 	ssid string
 	pass string
@@ -63,6 +63,7 @@ func main() {
 	connectToMQTT()
 
 	go handleDisplay()
+	go publishToMQTT()
 
 	for {
 		dialValue = dial.Get()
@@ -71,14 +72,6 @@ func main() {
 		buttonPush = button.Get()
 		if buttonPush {
 			blue.High()
-
-			println("Publishing MQTT message...")
-			data := []byte("{\"e\":[{ \"n\":\"hello\", \"sv\":\"world\" }]}")
-			token := mqttClient.Publish(topic, 0, false, data)
-			token.Wait()
-			if token.Error() != nil {
-				println(token.Error().Error())
-			}
 		} else {
 			blue.Low()
 		}
@@ -90,7 +83,7 @@ func main() {
 			bzr.Off()
 		}
 
-		time.Sleep(time.Millisecond * 10)
+		time.Sleep(time.Millisecond * 50)
 	}
 }
 
@@ -156,7 +149,7 @@ func handleDisplay() {
 
 		display.Display()
 
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(200 * time.Millisecond)
 	}
 }
 
@@ -200,7 +193,7 @@ func connectToAP() {
 	println(ip.String())
 }
 
-func connectToMQTT()  {
+func connectToMQTT() {
 	opts := mqtt.NewClientOptions()
 	opts.AddBroker(server).SetClientID("tinygo-client-" + randomString(10))
 
@@ -208,6 +201,26 @@ func connectToMQTT()  {
 	mqttClient = mqtt.NewClient(opts)
 	if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
 		failMessage(token.Error().Error())
+	}
+}
+
+func publishToMQTT() {
+	for {
+		println("Publishing MQTT message...")
+		data := "{\"e\":[{ \"dv\":" +
+			strconv.Itoa(int(dialValue)) +
+			", \"bp\":" +
+			strconv.FormatBool(buttonPush) +
+			", \"tp\":" +
+			strconv.FormatBool(touchPush) +
+			" }]}"
+
+		token := mqttClient.Publish(topic, 0, false, []byte(data))
+		token.Wait()
+		if token.Error() != nil {
+			println(token.Error().Error())
+		}
+		time.Sleep(time.Second)
 	}
 }
 
