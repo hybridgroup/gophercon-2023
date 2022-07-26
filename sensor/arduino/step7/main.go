@@ -18,8 +18,8 @@ import (
 )
 
 var (
-	blue   = machine.D12
-	green  = machine.D10
+	green   = machine.D12
+	red  = machine.D10
 	button = machine.D11
 	touch  = machine.D9
 	bzrPin = machine.D8
@@ -27,7 +27,7 @@ var (
 	bzr      buzzer.Device
 	dial     = machine.ADC{machine.ADC0}
 	pwm      = machine.PWM2 // PWM2 corresponds to Pin D10.
-	greenPwm uint8
+	redPwm uint8
 
 	dialValue  uint16
 	buttonPush bool
@@ -67,13 +67,13 @@ func main() {
 
 	for {
 		dialValue = dial.Get()
-		pwm.Set(greenPwm, uint32(dialValue))
+		pwm.Set(redPwm, uint32(dialValue))
 
 		buttonPush = button.Get()
 		if buttonPush {
-			blue.High()
+			green.High()
 		} else {
-			blue.Low()
+			green.Low()
 		}
 
 		touchPush = touch.Get()
@@ -88,7 +88,7 @@ func main() {
 }
 
 func initDevices() {
-	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	green.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
@@ -100,7 +100,7 @@ func initDevices() {
 		println("failed to configure PWM")
 		return
 	}
-	greenPwm, err = pwm.Channel(green)
+	redPwm, err = pwm.Channel(red)
 	if err != nil {
 		println("failed to configure PWM channel")
 		return
@@ -177,10 +177,7 @@ func connectToAP() {
 	println("Connecting to " + ssid)
 	err := adaptor.ConnectToAccessPoint(ssid, pass, 10*time.Second)
 	if err != nil { // error connecting to AP
-		for {
-			println(err)
-			time.Sleep(1 * time.Second)
-		}
+		failMessage(err.Error())
 	}
 
 	println("Connected.")

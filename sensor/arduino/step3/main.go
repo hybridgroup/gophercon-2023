@@ -6,23 +6,23 @@ import (
 )
 
 var (
-	blue = machine.D12
-	green = machine.D10
+	green = machine.D12
+	red = machine.D10
 	button = machine.D11
 )
 
 func main() {
-	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	green.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	red.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
 	for {
 		if button.Get() {
-			blue.High()
-			green.Low()
-		} else {
-			blue.Low()
 			green.High()
+			red.Low()
+		} else {
+			green.Low()
+			red.High()
 		}
 
 		time.Sleep(time.Millisecond * 100)

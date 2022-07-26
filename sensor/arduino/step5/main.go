@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	blue = machine.D12
-	green = machine.D10
+	green = machine.D12
+	red = machine.D10
 	button = machine.D11
 	touch = machine.D9
 	bzrPin = machine.D8
@@ -17,19 +17,19 @@ var (
 	bzr buzzer.Device
 	dial = machine.ADC{machine.ADC0}
 	pwm = machine.PWM2 // PWM2 corresponds to Pin D10.
-	greenPwm uint8
+	redPwm uint8
 )
 
 func main() {
 	initDevices()
 
 	for {
-		pwm.Set(greenPwm, uint32(dial.Get()))
+		pwm.Set(redPwm, uint32(dial.Get()))
 
 		if button.Get() {
-			blue.High()
+			green.High()
 		} else {
-			blue.Low()
+			green.Low()
 		}
 
 		if touch.Get() {
@@ -43,7 +43,7 @@ func main() {
 }
 
 func initDevices() {
-	blue.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	green.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	button.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	touch.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	bzrPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
@@ -55,7 +55,7 @@ func initDevices() {
 		println("failed to configure PWM")
 		return
 	}
-	greenPwm, err = pwm.Channel(green)
+	redPwm, err = pwm.Channel(red)
 	if err != nil {
 		println("failed to configure PWM channel")
 		return
