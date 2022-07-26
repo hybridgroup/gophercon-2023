@@ -2,7 +2,7 @@ module github.com/hybridgroup/gopherconeu-2022/drone/tello
 
 go 1.18
 
-require gobot.io/x/gobot v1.16.0
+require gobot.io/x/gobot v1.16.1-0.20220726192027-5ef304e86aa6
 
 require (
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
