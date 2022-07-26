@@ -52,7 +52,7 @@ func main() {
 
 		configureStickEvents(stick)
 
-		mplayer := exec.Command("mplayer", "-fps", "25", "-")
+		mplayer := exec.Command("mplayer", "-fps", "60", "-")
 		mplayerIn, _ := mplayer.StdinPipe()
 		configureVideoEvents(mplayerIn)
 		if err := mplayer.Start(); err != nil {
