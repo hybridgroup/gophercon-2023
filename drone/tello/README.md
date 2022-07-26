@@ -83,7 +83,28 @@ Now it is time for free flight, controlled by you, the human pilot. Plug in the 
 `sudo apt-get install libsdl2-dev`
 
 **Windows**:
-...
+
+1. Download and install the mingw-w64 compiler:
+
+https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/mingw-w64-v8.0.2.tar.bz2/download
+
+2. Download and install SDL2:
+
+http://libsdl.org/release/SDL2-2.0.22-win32-x64.zip
+
+- Extract the SDL2 folder from the archive using a tool like 7zip
+- Inside the folder, copy the x86_64-w64-mingw32 files into your mingw-w64 folder e.g. C:\Program Files\mingw-w64\x86_64-8.0.2-win32-seh-rt_v6\mingw64
+
+3. Setup Path environment variable:
+
+Put your mingw-w64 binaries location into your system Path environment variable. e.g C:\Program Files\mingw-w64\x86_64-8.0.2-win32-seh-rt_v6\mingw64\x86_64-w64-mingw32\bin
+
+4. Install go-sdl2:
+
+```
+go get -v github.com/veandco/go-sdl2/sdl@master
+```
+
 <hr>
 
 ### step06/main.go
