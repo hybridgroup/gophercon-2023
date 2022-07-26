@@ -4,41 +4,36 @@ import (
 	"fmt"
 	"time"
 
-	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/platforms/dji/tello"
 )
 
+var currentFlightData *tello.FlightData
+
 func main() {
-	var currentFlightData *tello.FlightData
-	drone    := tello.NewDriver("8888")
+	drone := tello.NewDriver("8888")
+	drone.On(tello.FlightDataEvent, func(data interface{}) {
+		fd := data.(*tello.FlightData)
+		currentFlightData = fd
+	})
 
-	work := func() {
-		fmt.Println("takeoff...")
+	drone.Start()
+	time.Sleep(2 * time.Second)
 
-		drone.On(tello.FlightDataEvent, func(data interface{}) {
-			fd := data.(*tello.FlightData)
-			currentFlightData = fd
-		})
+	fmt.Println("takeoff...")
+	drone.TakeOff()
 
-		drone.TakeOff()
+	start := time.Now()
+	for {
+		printFlightData(currentFlightData)
 
-		gobot.Every(1*time.Second, func() {
-			printFlightData(currentFlightData)
-		})
-
-		gobot.After(20*time.Second, func() {
+		if time.Since(start) > 10*time.Second {
+			fmt.Println("landing...")
 			drone.Land()
-		})
+			return
+		}
 
+		time.Sleep(time.Second)
 	}
-
-	robot := gobot.NewRobot("tello",
-		[]gobot.Connection{},
-		[]gobot.Device{drone},
-		work,
-	)
-
-	robot.Start()
 }
 
 func printFlightData(d *tello.FlightData) {
@@ -47,10 +42,11 @@ func printFlightData(d *tello.FlightData) {
 	}
 
 	displayData := `
+Battery:		%d%%
 Height:         %d
 Ground Speed:   %d
 Light Strength: %d
 
 `
-	fmt.Printf(displayData, d.Height, d.GroundSpeed, d.LightStrength)
+	fmt.Printf(displayData, d.BatteryPercentage, d.Height, d.GroundSpeed, d.LightStrength)
 }

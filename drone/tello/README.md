@@ -2,18 +2,17 @@
 
 The DJI Tello from Ryze Robotics uses a WiFi interface with a UDP-based API.
 
+You can use [Gobot](https://github.com/hybridgroup/gobot) to control the drone from your notebook computer.
+
 ## What you need
 
     - DJI Tello
     - Dualshock 3 gamepad, or compatible
-    - Personal computer with Go installed
-    - Works on Linux (kernel v4.14+), macOS, or Windows
+    - Personal computer with Go 1.18+ installed
+    - Works on Linux, macOS, or Windows
 
 ## Installation
 
-```
-go get -d -u gobot.io/x/gobot/...
-```
 
 ## Running the code
 When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Tello using the WiFi interface.
@@ -58,6 +57,14 @@ The drone can perform flips while flying. Run the code.
 
 <hr>
 
+### step04a/main.go
+
+This is the same functionality as step04, but instead of using Metal Gobot now we switch to using Standard Gobot. Notice the way that Gobot provides some functions like `Every()` and `After()` to help manage the various events. Run the code.
+
+```go run step4a/main.go```
+
+<hr>
+
 ### step05/main.go
 
 Now it is time for free flight, controlled by you, the human pilot. Plug in the DS3 controller to your computer. The controls are as follows:
@@ -74,6 +81,8 @@ Now it is time for free flight, controlled by you, the human pilot. Plug in the 
 
 **Linux**
 `sudo apt-get install libsdl2-dev`
+
+**Windows**:
 ...
 <hr>
 
@@ -86,6 +95,9 @@ Now that you have mastered the flight controls, let's grab the drone video feed.
 
 **Ubuntu Linux**:
 `sudo apt-get install mplayer`
+
+**Windows**:
+Download from https://oss.netfarm.it/mplayer/
 
 ```go run step6/main.go```
 

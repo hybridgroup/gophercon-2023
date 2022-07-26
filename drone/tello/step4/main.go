@@ -2,51 +2,54 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 
-	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/platforms/dji/tello"
 )
 
-var drone = tello.NewDriver("8888")
+var (
+	drone             = tello.NewDriver("8888")
+	currentFlightData *tello.FlightData
+	flightPattern     sync.Once
+)
 
 func main() {
-	var currentFlightData *tello.FlightData
-
-	work := func() {
+	drone.On(tello.FlightDataEvent, func(data interface{}) {
+		fd := data.(*tello.FlightData)
+		currentFlightData = fd
+	})
+	drone.On(tello.TakeoffEvent, func(data interface{}) {
 		fmt.Println("takeoff...")
+	})
+	drone.On(tello.FlipEvent, func(data interface{}) {
+		fmt.Println("Flip!")
+	})
 
-		drone.On(tello.FlightDataEvent, func(data interface{}) {
-			fd := data.(*tello.FlightData)
-			currentFlightData = fd
-		})
+	drone.Start()
+	time.Sleep(2 * time.Second)
 
-		drone.On(tello.FlipEvent, func(data interface{}) {
-			fmt.Println("Flip")
-		})
+	fmt.Println("Prepare for takeoff...")
+	drone.TakeOff()
 
-		drone.TakeOff()
+	start := time.Now()
+	for {
+		printFlightData(currentFlightData)
 
-		gobot.Every(1*time.Second, func() {
-			printFlightData(currentFlightData)
-		})
+		if time.Since(start) > 2*time.Second {
+			flightPattern.Do(func() {
+				go flyWithFlip()
+			})
+		}
 
-		gobot.After(5*time.Second, func() {
-			performFlips()
-		})
-
-		gobot.After(20*time.Second, func() {
+		if time.Since(start) > 20*time.Second {
+			fmt.Println("landing...")
 			drone.Land()
-		})
+			return
+		}
+
+		time.Sleep(time.Second)
 	}
-
-	robot := gobot.NewRobot("tello",
-		[]gobot.Connection{},
-		[]gobot.Device{drone},
-		work,
-	)
-
-	robot.Start()
 }
 
 func printFlightData(d *tello.FlightData) {
@@ -55,12 +58,26 @@ func printFlightData(d *tello.FlightData) {
 	}
 
 	displayData := `
+Battery:		%d%%
 Height:         %d
 Ground Speed:   %d
 Light Strength: %d
 
 `
-	fmt.Printf(displayData, d.Height, d.GroundSpeed, d.LightStrength)
+	fmt.Printf(displayData, d.BatteryPercentage, d.Height, d.GroundSpeed, d.LightStrength)
+}
+
+func flyWithFlips() {
+	drone.Forward(20)
+	time.Sleep(time.Second * 3)
+	drone.Forward(0)
+	drone.Backward(20)
+	time.Sleep(time.Second * 3)
+	drone.Backward(0)
+
+	performFlips()
+
+	drone.Land()
 }
 
 func performFlips() {

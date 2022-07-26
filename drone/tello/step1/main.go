@@ -4,28 +4,25 @@ import (
 	"fmt"
 	"time"
 
-	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/platforms/dji/tello"
 )
 
 func main() {
 	drone := tello.NewDriver("8888")
+	drone.Start()
 
-	work := func() {
-		fmt.Println("takeoff...")
+	time.Sleep(2 * time.Second)
+	fmt.Println("takeoff...")
+	drone.TakeOff()
 
-		drone.TakeOff()
-		gobot.After(10*time.Second, func() {
+	start := time.Now()
+	for {
+		if time.Since(start) > 10*time.Second {
 			fmt.Println("landing...")
 			drone.Land()
-		})
+			return
+		}
+
+		time.Sleep(time.Second)
 	}
-
-	robot := gobot.NewRobot("tello",
-		[]gobot.Connection{},
-		[]gobot.Device{drone},
-		work,
-	)
-
-	robot.Start()
 }
