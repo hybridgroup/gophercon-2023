@@ -117,6 +117,9 @@ Now that you have mastered the flight controls, let's grab the drone video feed.
 **Ubuntu Linux**:
 `sudo apt-get install mplayer`
 
+NOTE: you might have to open port 11111 for UDP on your machine like this:
+`sudo ufw allow 11111/udp`
+
 **Windows**:
 Download from https://oss.netfarm.it/mplayer/
 
