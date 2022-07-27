@@ -7,8 +7,6 @@ import (
 	"runtime"
 	"time"
 
-	"os"
-
 	"sync/atomic"
 
 	"gobot.io/x/gobot"
@@ -33,7 +31,7 @@ func main() {
 
 	switch runtime.GOOS {
 	case "darwin":
-		configLocation = fmt.Sprintf("%s/src/gobot.io/x/gobot/platforms/joystick/configs/dualshock3.json", os.Getenv("GOPATH"))
+		configLocation = "./joystick/configs/dualshock3.json"
 	case "linux":
 		configLocation = "dualshock3"
 	default:
