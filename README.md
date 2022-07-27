@@ -30,6 +30,12 @@ We have four Gopherbots for everyone to take turns playing with.
 
 Check out https://github.com/hybridgroup/gopherbot for more info.
 
+## TinyGo Music Jam
+
+Make your own electronic musical instruments using TinyGo and the Raspberry Pi Nano boards.
+
+Add some copper foil tape and high-ohm resistors when we say become part of the music we mean it!
+
 ## License
 
 Copyright (c) 2015-2022 The Hybrid Group and friends. Licensed under the MIT license.
