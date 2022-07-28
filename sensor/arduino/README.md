@@ -24,9 +24,10 @@ https://tinygo.org/getting-started/
 
 ### TinyGo drivers
 
-The TinyGo drivers that let you connect to sensors, displays, and other external peripheral devices are located in the separate repository at https://github.com/tinygo-org/drivers
+All of the code dependencies you will need are already in the Go modules file in this directory, so they will be downloaded and installed automatically. You don't need to do anything, when you follow the subsequent instructions they will be downloaded by TinyGo.
 
-The drivers and the other code dependencies are already in the Go modules file in this directory, so they will be downloaded and installed automatically.
+Just for your information, the TinyGo drivers that let you connect to sensors, displays, and other external peripheral devices are located in the separate repository at https://github.com/tinygo-org/drivers
+
 
 ## Connecting the Arduino Nano RP2040 Connect to your computer
 
