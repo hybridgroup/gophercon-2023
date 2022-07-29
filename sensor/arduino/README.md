@@ -18,9 +18,30 @@ Now you are ready to install TinyGo.
 
 ### TinyGo
 
-Follow the instructions here for your operating system:
+You will need to install the TinyGo 0.25.0-beta1 in order to do today's activities.
 
-https://tinygo.org/getting-started/
+You can find it at https://github.com/tinygo-org/tinygo/releases/tag/v0.25.0-beta1
+
+Download the version for your OS, then follow these instructions here for your operating system:
+
+<b>MacOS</b>
+
+https://tinygo.org/getting-started/install/macos/#alternative-installation
+
+Substitute the v0.25.0-beta1 in the above commands.
+
+<b>Linux</b>
+
+https://tinygo.org/getting-started/install/linux/#ubuntudebian
+
+Substitute the v0.25.0-beta1 in the above commands.
+
+<b>Windows</b>
+
+https://tinygo.org/getting-started/install/windows/#manual-install
+
+Substitute the v0.25.0-beta1 in the above commands.
+
 
 ### TinyGo drivers
 
