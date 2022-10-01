@@ -37,8 +37,7 @@ https://tinygo.org/getting-started/install/
 
 If you are one of the very fortunate individuals to have received a Gobadge, it is in fact your to keep!
 
-Go to the repo at for more info and check out the tutorial.
-
+Go to the repo at https://github.com/tinygo-org/gobadge for more info and check out the tutorial at https://github.com/tinygo-org/gobadge/tutorial
 
 ### TinyGo IoT sensors
 
@@ -52,13 +51,23 @@ There are 15 Grove sensor kits that you can use for the activity.
 
 Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get started.
 
-### Gopherdrone
+### Gopherdrones
 
-We have three DJI Tello drones for your Go-powered flying activities:
+#### DJI Tello
+
+We have three DJI Tello drones for your Go-powered flying activities.
 
 In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
 
 Want to get airborne? Go to [./drone/tello/](./drone/tello/).
+
+#### Parrot Minidrones
+
+We have two Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
+
+Post in-flight videos using hashtag #gophercon
+
+Ready for takeoff? Go to [./drone/minidrone/](./drone/minidrone/).
 
 ### Gopherbot
 
@@ -81,6 +90,8 @@ We can make beautiful music together, just go to [./musicjam/](./musicjam/).
 ### Sphero Ollie robots
 
 Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon! These fast Bluetooth controlled toys have long been a Go programmers fan favorite.
+
+There are 3 Sphero Ollie robots to help satisfy your need for speed.
 
 Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 
