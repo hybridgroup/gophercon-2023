@@ -1,8 +1,8 @@
-# Gophercon.EU 2022
+# Gophercon 2022
 
-The is the repository for the hardware hack session at Gophercon.EU 2022.
+The is the repository for the hardware hack session at Gophercon 2022.
 
-https://gophercon.eu/
+https://gophercon.com
 
 ### Please return all equipment when you are finished for the next person. Thank you!
 
@@ -13,46 +13,32 @@ https://gophercon.eu/
 First use git to clone this repo to your local machine:
 
 ```
-git clone https://github.com/hybridgroup/gopherconeu-2022.git
-cd gopherconeu-2022
+git clone https://github.com/hybridgroup/gophercon-2022.git
+cd gophercon-2022
 ```
 
-### Install Go 1.18
+### Install Go 1.19
 
-If somehow you have not installed Go 1.18 on your computer already, you can download it here:
+If somehow you have not installed Go 1.19 on your computer already, you can download it here:
 
-https://golang.org/dl/
+https://go.dev/dl/
 
 Now you are ready to install TinyGo.
 
 ### Install TinyGo
 
-You will need to install the TinyGo 0.25.0-beta1 in order to do today's activities.
+You will need to install the TinyGo 0.26.0 in order to do today's activities.
 
-You can find it at https://github.com/tinygo-org/tinygo/releases/tag/v0.25.0-beta1
-
-Download the version for your OS, then follow these instructions here for your operating system:
-
-<b>MacOS</b>
-
-https://tinygo.org/getting-started/install/macos/#alternative-installation
-
-Substitute the v0.25.0-beta1 in the above commands.
-
-<b>Linux</b>
-
-https://tinygo.org/getting-started/install/linux/#ubuntudebian
-
-Substitute the v0.25.0-beta1 in the above commands.
-
-<b>Windows</b>
-
-https://tinygo.org/getting-started/install/windows/#manual-install
-
-Substitute the v0.25.0-beta1 in the above commands.
-
+https://tinygo.org/getting-started/install/
 
 ## Activities
+
+### Gobadge Hacking
+
+If you are one of the very fortunate individuals to have received a Gobadge, it is in fact your to keep!
+
+Go to the repo at for more info and check out the tutorial.
+
 
 ### TinyGo IoT sensors
 
@@ -62,7 +48,7 @@ https://store.arduino.cc/collections/boards/products/arduino-nano-rp2040-connect
 
 These can be programmed using TinyGo.
 
-There are 24 Grove sensor kits that you can use for the activity.
+There are 15 Grove sensor kits that you can use for the activity.
 
 Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get started.
 
@@ -70,7 +56,7 @@ Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get start
 
 We have three DJI Tello drones for your Go-powered flying activities:
 
-In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gopherconeu
+In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
 
 Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
@@ -91,6 +77,12 @@ Thanks to the USB-MIDI support, you can turn your board into a tiny digital musi
 Add some copper foil tape and high-ohm resistors when we say become part of the music we mean it!
 
 We can make beautiful music together, just go to [./musicjam/](./musicjam/).
+
+### Sphero Ollie robots
+
+Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon! These fast Bluetooth controlled toys have long been a Go programmers fan favorite.
+
+Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 
 ## License
 

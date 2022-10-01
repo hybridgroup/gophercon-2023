@@ -60,9 +60,11 @@ https://experiments.withgoogle.com/ai/sound-maker/view/
 
 ## Controller
 
-The MIDI Controller is intended to run directly on Arduino to send MIDI commands via serial interface.
+The MIDI Controller is intended to run directly on Arduino to send MIDI commands via the USB interface.
 
 There are several different kinds of controllers in this folder.
+
+We also have some "MakeyButton" boards, which make it possible to become part of the circuit in a very literal sense by using your own body and conductive items to control the music.
 
 ### onenote
 
