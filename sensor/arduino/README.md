@@ -70,7 +70,7 @@ Let's get started!
 
 ### step0.go - Built-in LED
 
-![Arduino Nano RP2040 Connect](./images/step0.jpg)
+![Arduino Nano RP2040 Connect](./assets/step0.jpg)
 
 This tests that you can compile and flash your Arduino with TinyGo code, by blinking the built-in LED.
 
@@ -85,7 +85,7 @@ Once the Arduino is flashed correctly, the built-in amber LED to the right of th
 
 ### step1.go - Green LED
 
-![Arduino Nano RP2040 Connect](./images/step1.jpg)
+![Arduino Nano RP2040 Connect](./assets/step1.jpg)
 
 Now lets do the same thing, but instead of using the built-in LED we will use a separate LED that we will connect from the parts kit.
 
@@ -113,7 +113,7 @@ You should see the green LED blink.
 
 ### step2.go - Green LED, Button
 
-![Arduino](./images/step2.jpg)
+![Arduino](./assets/step2.jpg)
 
 Next, we will attach a push button. The button will control the LED we added in the previous step. When you push the button, the LED will turn on. When you release the button, it will turn off.
 
@@ -137,7 +137,7 @@ When you press the button, the green LED should turn on.
 
 ### step3.go - Green LED, Button, Red LED
 
-![Arduino](./images/step3.jpg)
+![Arduino](./assets/step3.jpg)
 
 Now we will add a second LED, that will will also control with the same push button. One LED will be on with the button is pushed, and the other will be on when the button is released.
 
@@ -159,7 +159,7 @@ The red LED should light up. When you press the button, the green LED should tur
 
 ### step4.go - Green LED, Button, Red LED, Buzzer, Touch
 
-![Arduino](./images/step4.jpg)
+![Arduino](./assets/step4.jpg)
 
 In this step we will add two new devices. The first one is a capacitive touch sensor. It essentially acts like a button, but you only need to touch it to activate it. The second is a small piezoelectric buzzer. When current is sent to the buzzer, it makes a noise.
 
@@ -190,7 +190,7 @@ When you touch the touch sensor, the buzzer should emit a noise.
 
 ### step5.go - Green LED, Button, Red LED, Buzzer, Touch, Dial
 
-![Arduino](./images/step5.jpg)
+![Arduino](./assets/step5.jpg)
 
 The next device we will add is a rotary dial. The rotary dial is an analog device. The amount of voltage that is allowed to pass through it is based on how far you turn the dial. 
 
@@ -218,7 +218,7 @@ Adjusting the dial sensor should control the brightness of the red LED.
 
 ### step6.go - Green LED, Button, Red LED, Buzzer, Touch, Dial, OLED display
 
-![Arduino](./images/step6.jpg)
+![Arduino](./assets/step6.jpg)
 
 Now we will add a SSD1306 OLED display to show the state of the buttons and dial. We will control this display using an [I2C interface](https://en.wikipedia.org/wiki/I%C2%B2C).
 
@@ -248,7 +248,7 @@ The dial should now cause the OLED display to show its current position. The OLE
 
 ### step7.go - Green LED, Button, Red LED, Buzzer, Touch, Dial, MQTT
 
-![Arduino](./images/step6.jpg)
+![Arduino](./assets/step6.jpg)
 
 In this step we will connect to a machine to machine messaging server using the [MQTT machine to machine messaging protocol](https://en.wikipedia.org/wiki/MQTT). No additional hardware is required for this step.
 
