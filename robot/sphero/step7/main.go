@@ -54,13 +54,13 @@ func main() {
 			key := data.(keyboard.KeyEvent)
 
 			switch key.Key {
-			case keyboard.ArrowUp:
+			case keyboard.W:
 				rover.Roll(40, 0)
-			case keyboard.ArrowRight:
+			case keyboard.D:
 				rover.Roll(40, 90)
-			case keyboard.ArrowDown:
+			case keyboard.S:
 				rover.Roll(40, 180)
-			case keyboard.ArrowLeft:
+			case keyboard.A:
 				rover.Roll(40, 270)
 			case keyboard.Spacebar:
 				rover.Stop()

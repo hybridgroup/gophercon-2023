@@ -14,7 +14,9 @@ require (
 	github.com/gofrs/uuid v4.3.0+incompatible // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/muka/go-bluetooth v0.0.0-20220830075246-0746e3a1ea53 // indirect
+	github.com/nsf/termbox-go v1.1.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/saltosystems/winrt-go v0.0.0-20220913104103-712830fcd2ad // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
@@ -22,5 +24,5 @@ require (
 	go.bug.st/serial v1.4.0 // indirect
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
 	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
-	tinygo.org/x/bluetooth v0.5.1-0.20220915173542-e843ce91a6c8 // indirect
+	tinygo.org/x/bluetooth v0.6.0 // indirect
 )
