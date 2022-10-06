@@ -37,7 +37,7 @@ https://tinygo.org/getting-started/install/
 
 If you are one of the very fortunate individuals to have received a Gobadge, it is in fact your to keep!
 
-Go to the repo at https://github.com/tinygo-org/gobadge for more info and check out the tutorial at https://github.com/tinygo-org/gobadge/tutorial
+Go to the repo at https://github.com/tinygo-org/gobadge for more info and check out the tutorial at https://github.com/tinygo-org/gobadge/tree/main/tutorial.
 
 ### TinyGo IoT sensors
 
