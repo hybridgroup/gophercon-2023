@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/dji/tello"
+	"gobot.io/x/gobot/platforms/ble"
+	"gobot.io/x/gobot/platforms/sphero/ollie"
 
 	term "github.com/nsf/termbox-go"
 )
-
-var drone = tello.NewDriver("8888")
-
-var currentFlightData *tello.FlightData
 
 func main() {
 	err := term.Init()
@@ -18,17 +18,16 @@ func main() {
 		panic(err)
 	}
 
+	bleAdaptor := ble.NewClientAdaptor(os.Args[1])
+	rover := ollie.NewDriver(bleAdaptor)
+
+	rover.On("collision", func(data interface{}) {
+		fmt.Printf("collision detected = %+v \n", data)
+		rover.SetRGB(255, 0, 0)
+	})
+
 	work := func() {
 		defer term.Close()
-
-		drone.On(tello.FlightDataEvent, func(data interface{}) {
-			fd := data.(*tello.FlightData)
-			currentFlightData = fd
-		})
-
-		drone.On(tello.FlipEvent, func(data interface{}) {
-			fmt.Println("Flip")
-		})
 
 		for {
 			switch ev := term.PollEvent(); ev.Type {
@@ -42,77 +41,35 @@ func main() {
 					term.Sync()
 					// WSAD to control forward, backward, left, and right
 					switch ev.Ch {
-					case '[':
-						fmt.Println("takeoff...")
-						drone.TakeOff()
-					case ']':
-						fmt.Println("land...")
-						drone.Land()
 					case 'w':
 						fmt.Println("forward...")
-						drone.Forward(20)
+						rover.Roll(60, 0)
 					case 's':
 						fmt.Println("backward...")
-						drone.Backward(20)
+						rover.Roll(60, 180)
 					case 'a':
 						fmt.Println("left...")
-						drone.Left(20)
+						rover.Roll(60, 270)
 					case 'd':
 						fmt.Println("right...")
-						drone.Right(20)
-					// IKJL to control up, down, spin counter clockwise, spin clockwise
-					case 'i':
-						fmt.Println("up...")
-						drone.Up(20)
-					case 'k':
-						fmt.Println("down...")
-						drone.Down(20)
-					case 'j':
-						fmt.Println("spin counter clockwise...")
-						drone.CounterClockwise(tello.ValidatePitch(20, 10))
-					case 'l':
-						fmt.Println("spin clockwise...")
-						drone.Clockwise(tello.ValidatePitch(20, 10))
-					// TGFH to flip front, flip back, flip left, flip right
-					case 't':
-						fmt.Println("front flip...")
-						drone.FrontFlip()
-					case 'g':
-						fmt.Println("back flip...")
-						drone.BackFlip()
-					case 'f':
-						fmt.Println("left flip...")
-						drone.LeftFlip()
-					case 'h':
-						fmt.Println("right flip...")
-						drone.RightFlip()
+						rover.Roll(60, 90)
+					default:
+						rover.Stop()
 					}
 				}
 			case term.EventError:
 				panic(ev.Err)
 			}
+
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 
-	robot := gobot.NewRobot("tello",
-		[]gobot.Connection{},
-		[]gobot.Device{drone},
+	robot := gobot.NewRobot("rover",
+		[]gobot.Connection{bleAdaptor},
+		[]gobot.Device{rover},
 		work,
 	)
 
 	robot.Start()
-}
-
-func printFlightData(d *tello.FlightData) {
-	if d.BatteryLow {
-		fmt.Printf(" -- Battery low: %d%% --\n", d.BatteryPercentage)
-	}
-
-	displayData := `
-Height:         %d
-Ground Speed:   %d
-Light Strength: %d
-
-`
-	fmt.Printf(displayData, d.Height, d.GroundSpeed, d.LightStrength)
 }
