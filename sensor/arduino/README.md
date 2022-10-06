@@ -4,44 +4,7 @@
 
     - Arduino Nano RP2040 Connect IoT board
     - Grove IoT Starter Kit parts
-    - Personal computer with Go 1.18+ and TinyGo installed, and a serial port.
-
-## Installation
-
-### Go 1.18
-
-If somehow you have not installed Go 1.18 on your computer already, you can download it here:
-
-https://golang.org/dl/
-
-Now you are ready to install TinyGo.
-
-### TinyGo
-
-You will need to install the TinyGo 0.25.0-beta1 in order to do today's activities.
-
-You can find it at https://github.com/tinygo-org/tinygo/releases/tag/v0.25.0-beta1
-
-Download the version for your OS, then follow these instructions here for your operating system:
-
-<b>MacOS</b>
-
-https://tinygo.org/getting-started/install/macos/#alternative-installation
-
-Substitute the v0.25.0-beta1 in the above commands.
-
-<b>Linux</b>
-
-https://tinygo.org/getting-started/install/linux/#ubuntudebian
-
-Substitute the v0.25.0-beta1 in the above commands.
-
-<b>Windows</b>
-
-https://tinygo.org/getting-started/install/windows/#manual-install
-
-Substitute the v0.25.0-beta1 in the above commands.
-
+    - Personal computer with Go 1.19+ and TinyGo installed, and a serial port.
 
 ### TinyGo drivers
 
@@ -77,7 +40,7 @@ This tests that you can compile and flash your Arduino with TinyGo code, by blin
 Run the following command to compile your code, and flash it onto the Arduino:
 
 ```
-tinygo flash -target nano-rp2040 ./step0/main.go
+tinygo flash -target nano-rp2040 ./step0/
 ```
 
 Once the Arduino is flashed correctly, the built-in amber LED to the right of the USB jack should start to turn on and off once per second. Now everything is setup correctly and you are ready to continue.
@@ -105,7 +68,7 @@ Now lets do the same thing, but instead of using the built-in LED we will use a 
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step1/main.go
+tinygo flash -target nano-rp2040 ./step1/
 ```
 
 You should see the green LED blink.
@@ -129,7 +92,7 @@ Next, we will attach a push button. The button will control the LED we added in 
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step2/main.go
+tinygo flash -target nano-rp2040 ./step2/
 ```
 
 When you press the button, the green LED should turn on.
@@ -152,7 +115,7 @@ Now we will add a second LED, that will will also control with the same push but
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step3/main.go
+tinygo flash -target nano-rp2040 ./step3/
 ```
 
 The red LED should light up. When you press the button, the green LED should turn on, and the red LED should turn off. When you release the button, the green LED should turn off, and the red LED should turn on again.
@@ -182,7 +145,7 @@ In this step we will add two new devices. The first one is a capacitive touch se
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step4/main.go
+tinygo flash -target nano-rp2040 ./step4/
 ```
 
 When you touch the touch sensor, the buzzer should emit a noise.
@@ -210,7 +173,7 @@ We will use this to control the brightness of the red LED. To do this, we will n
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step5/main.go
+tinygo flash -target nano-rp2040 ./step5/
 ```
 
 Adjusting the dial sensor should control the brightness of the red LED.
@@ -240,7 +203,7 @@ The TinyDraw package has a number of drawing primitives like circles, lines, and
 Run the code.
 
 ```
-tinygo flash -target nano-rp2040 ./step6/main.go
+tinygo flash -target nano-rp2040 ./step6/
 ```
 
 The dial should now cause the OLED display to show its current position. The OLED should also have two empty circles that will light up when you press the Button to light up the Blue LED and when you press the touch sensor respectively.
@@ -255,13 +218,15 @@ In this step we will connect to a machine to machine messaging server using the 
 Substitute the correct values for your WiFi setup in the following command:
 
 ```
-tinygo flash -target nano-rp2040 -ldflags="-X main.ssid=MYSSID -X main.pass=MYPASS" ./step7/main.go
+tinygo flash -target nano-rp2040 -ldflags="-X main.ssid=TinyGoHackDay -X main.pass=community" ./step7/
 ```
 
-How to tell if it is working...
+## How to tell if it is working
+
+Install the client tools for `mosquitto` for your operating system, then run:
 
 ```
-mosquitto_sub -h 'test.mosquitto.org' -t 'tinygo'
+mosquitto_sub -h 'test.mosquitto.org' -t 'tinygohackday'
 ```
 
 When you run this command, you should be able to see the messages appear. These are being sent from your own machine to an MQTT broker provided by the Eclipse Foundation and running on a cloud server that they provide.

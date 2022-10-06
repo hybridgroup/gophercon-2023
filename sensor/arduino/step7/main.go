@@ -40,7 +40,7 @@ var (
 
 	// this is the ESP chip that has the WIFININA firmware flashed on it
 	adaptor *wifinina.Device
-	topic   = "tinygo"
+	topic   = "tinygohackday"
 
 	mqttClient mqtt.Client
 )
