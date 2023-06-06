@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"time"
 	"os"
+	"time"
 
-	"gobot.io/x/gobot/platforms/ble"
-	"gobot.io/x/gobot/platforms/parrot/minidrone"
+	"gobot.io/x/gobot/v2/platforms/ble"
+	"gobot.io/x/gobot/v2/platforms/parrot/minidrone"
 )
 
 func main() {
