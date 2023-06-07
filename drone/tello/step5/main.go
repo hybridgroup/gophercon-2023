@@ -7,9 +7,9 @@ import (
 
 	"sync/atomic"
 
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/dji/tello"
-	"gobot.io/x/gobot/platforms/joystick"
+	gobot "gobot.io/x/gobot/v2"
+	"gobot.io/x/gobot/v2/platforms/dji/tello"
+	"gobot.io/x/gobot/v2/platforms/joystick"
 )
 
 var drone = tello.NewDriver("8888")
