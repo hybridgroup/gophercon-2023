@@ -5,10 +5,10 @@ import (
 	"os"
 	"time"
 
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/ble"
-	"gobot.io/x/gobot/platforms/mqtt"
-	"gobot.io/x/gobot/platforms/sphero/ollie"
+	gobot "gobot.io/x/gobot/v2"
+	"gobot.io/x/gobot/v2/platforms/ble"
+	"gobot.io/x/gobot/v2/platforms/mqtt"
+	"gobot.io/x/gobot/v2/platforms/sphero/ollie"
 )
 
 func main() {
@@ -47,4 +47,3 @@ func main() {
 
 	robot.Start()
 }
-

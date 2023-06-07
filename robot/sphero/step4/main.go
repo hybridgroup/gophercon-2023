@@ -51,8 +51,8 @@
 // 		work,
 // 	)
 
-// 	robot.Start()
-// }
+//		robot.Start()
+//	}
 package main
 
 import (
@@ -60,9 +60,9 @@ import (
 	"os"
 	"time"
 
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/ble"
-	"gobot.io/x/gobot/platforms/sphero/ollie"
+	gobot "gobot.io/x/gobot/v2"
+	"gobot.io/x/gobot/v2/platforms/ble"
+	"gobot.io/x/gobot/v2/platforms/sphero/ollie"
 
 	term "github.com/nsf/termbox-go"
 )
