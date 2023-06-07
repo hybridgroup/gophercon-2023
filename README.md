@@ -1,10 +1,10 @@
-# Gophercon 2022
+# Gophercon.EU 2022
 
-The is the repository for the hardware hack session at Gophercon 2022.
+The is the repository for the hardware hack session at Gophercon.EU 2023.
 
-https://gophercon.com
+https://gophercon.eu/
 
-### Please return all equipment when you are finished for the next person. Thank you!
+### Please return all loaner equipment when you are finished for the next person. Thank you!
 
 ## Installation
 
@@ -13,13 +13,13 @@ https://gophercon.com
 First use git to clone this repo to your local machine:
 
 ```
-git clone https://github.com/hybridgroup/gophercon-2022.git
-cd gophercon-2022
+git clone https://github.com/hybridgroup/gopherconeu-2023.git
+cd gopherconeu-2023
 ```
 
-### Install Go 1.19
+### Install Go 1.20
 
-If somehow you have not installed Go 1.19 on your computer already, you can download it here:
+If somehow you have not installed Go 1.20 on your computer already, you can download it here:
 
 https://go.dev/dl/
 
@@ -27,17 +27,17 @@ Now you are ready to install TinyGo.
 
 ### Install TinyGo
 
-You will need to install the TinyGo 0.26.0 in order to do today's activities.
+You will need to install TinyGo 0.28.0 in order to do today's activities.
 
 https://tinygo.org/getting-started/install/
 
 ## Activities
 
-### Gobadge Hacking
+### Gopher Badge Hacking
 
-If you are one of the very fortunate individuals to have received a Gobadge, it is in fact your to keep!
+If you are one of the very fortunate individuals to have received a Gopher Badge, it is in fact yours to keep!
 
-Go to the repo at https://github.com/tinygo-org/gobadge for more info and check out the tutorial at https://github.com/tinygo-org/gobadge/tree/main/tutorial.
+Go to https://gopherbadge.com/ for more info.
 
 ### TinyGo IoT sensors
 
@@ -89,7 +89,7 @@ We can make beautiful music together, just go to [./musicjam/](./musicjam/).
 
 ### Sphero Ollie robots
 
-Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon! These fast Bluetooth controlled toys have long been a Go programmers fan favorite.
+Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon EU! These fast Bluetooth controlled robotic toys have long been a Go programmer fan favorite.
 
 There are 3 Sphero Ollie robots to help satisfy your need for speed.
 
@@ -97,4 +97,4 @@ Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 
 ## License
 
-Copyright (c) 2015-2022 The Hybrid Group and friends. Licensed under the MIT license.
+Copyright (c) 2015-2023 The Hybrid Group and friends. Licensed under the MIT license.
