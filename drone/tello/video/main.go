@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"os/exec"
 	"time"
 
 	gobot "gobot.io/x/gobot/v2"
@@ -14,39 +16,48 @@ func main() {
 	var currentFlightData *tello.FlightData
 
 	work := func() {
-		fmt.Println("takeoff...")
+		mplayer := exec.Command("mplayer", "-fps", "60", "-")
+		mplayerIn, _ := mplayer.StdinPipe()
+		configureVideoEvents(mplayerIn)
+		if err := mplayer.Start(); err != nil {
+			fmt.Println(err)
+			return
+		}
 
 		drone.On(tello.FlightDataEvent, func(data interface{}) {
 			fd := data.(*tello.FlightData)
 			currentFlightData = fd
 		})
 
-		drone.On(tello.FlipEvent, func(data interface{}) {
-			fmt.Println("Flip")
-		})
-
-		drone.TakeOff()
-
 		gobot.Every(1*time.Second, func() {
 			printFlightData(currentFlightData)
-		})
-
-		gobot.After(5*time.Second, func() {
-			flyWithFlips()
-		})
-
-		gobot.After(20*time.Second, func() {
-			drone.Land()
 		})
 	}
 
 	robot := gobot.NewRobot("tello",
-		[]gobot.Connection{},
 		[]gobot.Device{drone},
 		work,
 	)
 
 	robot.Start()
+}
+
+func configureVideoEvents(mplayerIn io.WriteCloser) {
+	drone.On(tello.ConnectedEvent, func(data interface{}) {
+		fmt.Println("Connected")
+		drone.StartVideo()
+		drone.SetVideoEncoderRate(tello.VideoBitRateAuto)
+		gobot.Every(100*time.Millisecond, func() {
+			drone.StartVideo()
+		})
+	})
+
+	drone.On(tello.VideoFrameEvent, func(data interface{}) {
+		pkt := data.([]byte)
+		if _, err := mplayerIn.Write(pkt); err != nil {
+			fmt.Println(err)
+		}
+	})
 }
 
 func printFlightData(d *tello.FlightData) {
@@ -61,23 +72,4 @@ Ground Speed:   %d
 
 `
 	fmt.Printf(displayData, d.BatteryPercentage, d.Height, d.GroundSpeed)
-}
-
-func flyWithFlips() {
-	drone.Forward(20)
-	time.Sleep(time.Second * 3)
-	drone.Forward(0)
-	drone.Backward(20)
-	time.Sleep(time.Second * 3)
-	drone.Backward(0)
-
-	performFlips()
-
-	drone.Land()
-}
-
-func performFlips() {
-	drone.FrontFlip()
-	time.Sleep(time.Second * 3)
-	drone.BackFlip()
 }

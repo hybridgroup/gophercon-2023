@@ -199,10 +199,9 @@ func printFlightData(d *tello.FlightData) {
 Battery:		%d%%
 Height:         %d
 Ground Speed:   %d
-Light Strength: %d
 
 `
-	fmt.Printf(displayData, d.BatteryPercentage, d.Height, d.GroundSpeed, d.LightStrength)
+	fmt.Printf(displayData, d.BatteryPercentage, d.Height, d.GroundSpeed)
 }
 
 func getLeftStick() pair {

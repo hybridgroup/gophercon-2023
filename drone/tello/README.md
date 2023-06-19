@@ -13,31 +13,39 @@ You can use [Gobot](https://github.com/hybridgroup/gobot) to control the drone f
     - Personal computer with Go 1.18+ installed
     - Works on Linux, macOS, or Windows
 
+Do you have a Gopher Badge or GoBadge? You can also use it to control your drone using the Flightbadge firmware! Look in the tutorials directory in the repo for your specific badge.
+
 ## Installation
 
 Change directories into this one where the needed Go modules files are located. 
 
 Any other dependencies are listed in the tutorial under the step where they are needed.
 
-## Running the code
-
-When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Tello using the WiFi interface.
-
-Therefore, you must connect to the Tello drone which acts as a WiFi access point before you will be able to run any of the code.
-
 ## Connecting to Tello as WiFi access point
 
-Look on the bottom of the Tello to find the name of the access point.
+To communicate with your Tello, you need to connect to it using WiFi. The Tello will act as a WiFi access point, and you can just connect to it like you would any other.
 
-Make sure you have a battery in the Tello, and turn it on.
+Look on the inside of the drone where the battery goes for a small label that has the name of that Tello access point. It will be named something like "TELLO-C48BF0". Note that you must remove the battery to see the label.
 
-Once the LED on the front of the Tello turns green, it is ready for you to connect to.
+Make sure you have a battery in the Tello, and turn it on by pushing the button located on the side of the drone.
 
-Use your computer's normal WiFi connection to connect to your Tello which should now appear in the list of available access points.
+Once the LED on the front of the Tello starts blinking amber rapidly, it is ready for you to connect to.
+
+Use your computer's normal WiFi connection to connect to your Tello which should now appear in the list of available access points. There is no password.
 
 Make sure you do not connect to someone else's Tello by mistake.
 
 Note that you will not be able to connect to the Internet at the same time as you are connected to your Tello. This usually means a lot of connecting and disconnecting.
+
+Now you are ready to try running some code.
+
+## Running the code
+
+When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Tello using the WiFi interface.
+
+Therefore, you must be connected to the Tello drone which acts as a WiFi access point before you will be able to run any of the code.
+
+Once your program is running and connects to the drone, the LED on the front of the drone will blink more slowly. If the program you are running will cause it to take off, make sure you get out of the way! :)
 
 ## Code
 
