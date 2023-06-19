@@ -1,5 +1,7 @@
 # DJI Tello Drone
 
+![Tello](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ryze_Tello.jpg/320px-Ryze_Tello.jpg)
+
 The DJI Tello from Ryze Robotics uses a WiFi interface with a UDP-based API.
 
 You can use [Gobot](https://github.com/hybridgroup/gobot) to control the drone from your notebook computer.
@@ -13,13 +15,29 @@ You can use [Gobot](https://github.com/hybridgroup/gobot) to control the drone f
 
 ## Installation
 
+Change directories into this one where the needed Go modules files are located. 
+
+Any other dependencies are listed in the tutorial under the step where they are needed.
 
 ## Running the code
+
 When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Tello using the WiFi interface.
 
 Therefore, you must connect to the Tello drone which acts as a WiFi access point before you will be able to run any of the code.
 
-Further instructions here...
+## Connecting to Tello as WiFi access point
+
+Look on the bottom of the Tello to find the name of the access point.
+
+Make sure you have a battery in the Tello, and turn it on.
+
+Once the LED on the front of the Tello turns green, it is ready for you to connect to.
+
+Use your computer's normal WiFi connection to connect to your Tello which should now appear in the list of available access points.
+
+Make sure you do not connect to someone else's Tello by mistake.
+
+Note that you will not be able to connect to the Internet at the same time as you are connected to your Tello. This usually means a lot of connecting and disconnecting.
 
 ## Code
 
@@ -126,6 +144,7 @@ Download from https://oss.netfarm.it/mplayer/
 ```go run step6/main.go```
 
 <hr>
+
 ### keyboard/main.go
 
 Control the tello with your keyboard!

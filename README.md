@@ -55,9 +55,11 @@ Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get start
 
 #### DJI Tello
 
+![Tello](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ryze_Tello.jpg/320px-Ryze_Tello.jpg)
+
 We have three DJI Tello drones for your Go-powered flying activities.
 
-In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
+In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gopherconeu
 
 Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
@@ -65,7 +67,7 @@ Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
 We have two Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
 
-Post in-flight videos using hashtag #gophercon
+Post in-flight videos using hashtag #gopherconeu
 
 Ready for takeoff? Go to [./drone/minidrone/](./drone/minidrone/).
 
