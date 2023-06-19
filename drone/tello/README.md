@@ -96,17 +96,24 @@ This is the same functionality as step04, but instead of using Metal Gobot now w
 Now it is time for free flight, controlled by you, the human pilot. Plug in the DS3 controller to your computer. The controls are as follows:
 
 * Triangle    - Takeoff
-* X           -  Land
+* X           - Land
 * Left stick  - altitude
 * Right stick - direction
 
+
+IMPORTANT NOTE: you must press the "P3" button when your program first runs for the "clone" joysticks we are using to fully turn on.
+
 **macOS**
+
 `brew install sdl2{,_image,_mixer,_ttf,_gfx} pkg-config`
 
 `go run step5/main.go`
 
 **Linux**
+
 `sudo apt-get install libsdl2-dev`
+
+`go run step5/main.go`
 
 **Windows**:
 
@@ -130,6 +137,8 @@ Put your mingw-w64 binaries location into your system Path environment variable.
 ```
 go get -v github.com/veandco/go-sdl2/sdl@master
 ```
+
+`go run step5/main.go`
 
 <hr>
 
