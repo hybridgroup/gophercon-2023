@@ -19,9 +19,11 @@ Since this code uses the TinyGo Bluetooth package, you may have some specific in
 
 When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Ollie using the Bluetooth interface.
 
-Therefore, you must connect to the Ollie drone by knowing the correct name and MAC address for that robot.
+On Linux and Windows you will use the MAC address of the device to connect.
 
-When running the code using macOS you should use the name. If you are running the code on Linux or Windows, you should use the MAC address.
+On macOS you must use the Bluetooth ID of the device to connect.
+
+Therefore, you must know the correct name and then MAC address or ID for that robot in order to connect to it.
 
 The number of the robot should be listed on the side of it. You can lookup the correct name/MAC address in the following table.
 
@@ -32,6 +34,8 @@ The number of the robot should be listed on the side of it. You can lookup the c
 |3|2B-5F6A|D6:5F:69:D6:5F:6A|
 |4|2B-DE50|E0:4A:58:0C:DE:50|
 
+To find out the unique Bluetooth ID assigned to that device from macOS, you can use the Bluetooth scanner located in the `tools/blescanner` directory of this repo.
+
 ## Code
 
 ### step1
@@ -39,7 +43,7 @@ The number of the robot should be listed on the side of it. You can lookup the c
 This tests that the Sphero Ollie is connected correctly to your computer, by blinking the built-in LED.
 
 ```
-go run ./step1/ AA:BB:CC:DD:EE
+go run ./step1/ [MAC address or Bluetooth ID]
 ```
 
 ### step2
@@ -47,7 +51,7 @@ go run ./step1/ AA:BB:CC:DD:EE
 Rolls around at random.
 
 ```
-go run ./step2/ AA:BB:CC:DD:EE
+go run ./step2/ [MAC address or Bluetooth ID]
 ```
 
 ### step3
@@ -55,16 +59,22 @@ go run ./step2/ AA:BB:CC:DD:EE
 Gets collision notifications from robot.
 
 ```
-go run ./step3/ AA:BB:CC:DD:EE
+go run ./step3/ [MAC address or Bluetooth ID]
 ```
 
 ### step4
 
-Control robot using keyboard arrow keys.
+Control robot using keyboard.
 
 ```
-go run ./step4/ AA:BB:CC:DD:EE
+go run ./step4/ [MAC address or Bluetooth ID]
 ```
+
+`w` - forward
+`a` - left
+`s` - backward
+`d` - right
+`ESC`, `CTRL-C` - exit
 
 ### step5
 
@@ -76,7 +86,7 @@ When the heartbeat data is received from the base station, the built-in LED will
 
 
 ```
-go run ./step5/ AA:BB:CC:DD:EE [need this info]
+go run ./step5/ [MAC address or Bluetooth ID] [need this info]
 ```
 
 ### step6
@@ -84,7 +94,7 @@ go run ./step5/ AA:BB:CC:DD:EE [need this info]
 Control robot using keyboard to collect data and send to base station.
 
 ```
-go run ./step6/ AA:BB:CC:DD:EE [need this info]
+go run ./step6/ [MAC address or Bluetooth ID] [need this info]
 ```
 
 ### step7
@@ -92,7 +102,7 @@ go run ./step6/ AA:BB:CC:DD:EE [need this info]
 Control robot using keyboard to collect data and send to base station.
 
 ```
-go run ./step7/ AA:BB:CC:DD:EE [need this info]
+go run ./step7/ [MAC address or Bluetooth ID] [need this info]
 ```
 
 ## License

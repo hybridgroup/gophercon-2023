@@ -23,9 +23,11 @@ Any other dependencies are listed in the tutorial under the step where they are 
 ## Running the code
 When you run any of these examples, you will compile and execute the code on your computer. When you are running the program, you will be communicating with the Minidrone using the Bluetooth interface.
 
-Therefore, you must connect to the Minidrone drone by knowing the correct name and MAC address for that drone.
+On Linux and Windows you will use the MAC address of the device to connect.
 
-When running the code using macOS you should use the name. If you are running the code on Linux or Windows, you should use the MAC address.
+On macOS you must use the Bluetooth ID of the device to connect.
+
+Therefore, you must know the correct name and then MAC address or ID for that robot in order to connect to it.
 
 The name of the drone should be listed on the side of it. You can lookup the correct MAC address in the following table.
 
@@ -35,6 +37,7 @@ The name of the drone should be listed on the side of it. You can lookup the cor
 |Drone 2|XX|
 |Drone 3|XX|
 
+To find out the unique Bluetooth ID assigned to that device from macOS, you can use the Bluetooth scanner located in the tools directory of this repo.
 
 ## Code
 
@@ -42,7 +45,7 @@ The name of the drone should be listed on the side of it. You can lookup the cor
 
 Let's start with a simple takeoff, and then land. Make sure the drone is turned on and you know the correct MAC address or name, then run the code.
 
-```go run ./step1/main.go [dronename or MAC address]```
+```go run ./step1/main.go [MAC address or Bluetooth ID]```
 
 <hr>
 
@@ -50,7 +53,7 @@ Let's start with a simple takeoff, and then land. Make sure the drone is turned 
 
 The drone will hover and return some flight data info. Run this code:
 
-```go run ./step2/main.go [dronename or MAC address]```
+```go run ./step2/main.go [MAC address or Bluetooth ID]```
 
 <hr>
 
@@ -60,7 +63,7 @@ The drone will hover and return some flight data info. Run this code:
 
 The drone can move forward, backward, to the right, and the left, all while maintaining a steady altitude. Run the code. 
 
-```go run ./step3/main.go [dronename or MAC address]```
+```go run ./step3/main.go [MAC address or Bluetooth ID]```
 
 <hr>
 
@@ -68,7 +71,7 @@ The drone can move forward, backward, to the right, and the left, all while main
 
 The drone can perform flips while flying. Run the code.
 
-```go run ./step4/main.go [dronename or MAC address]```
+```go run ./step4/main.go [MAC address or Bluetooth ID]```
 
 <hr>
 
@@ -76,7 +79,7 @@ The drone can perform flips while flying. Run the code.
 
 This is the same functionality as step04, but instead of using Metal Gobot now we switch to using Standard Gobot. Notice the way that Gobot provides some functions like `Every()` and `After()` to help manage the various events. Run the code.
 
-```go run ./step4a/main.go [dronename or MAC address]```
+```go run ./step4a/main.go [MAC address or Bluetooth ID]```
 
 <hr>
 
@@ -96,13 +99,13 @@ IMPORTANT NOTE: you must press the "P3" button when your program first runs for 
 
 `brew install sdl2{,_image,_mixer,_ttf,_gfx} pkg-config`
 
-`go run ./step5/main.go [dronename or MAC address]`
+`go run ./step5/main.go [Bluetooth ID]`
 
 **Linux**
 
 `sudo apt-get install libsdl2-dev`
 
-`go run step5/main.go`
+`go run step5/main.go [MAC address]`
 
 **Windows**:
 
@@ -127,7 +130,7 @@ Put your mingw-w64 binaries location into your system Path environment variable.
 go get -v github.com/veandco/go-sdl2/sdl@master
 ```
 
-`go run ./step5/main.go [dronename or MAC address]`
+`go run ./step5/main.go [MAC address]`
 
 <hr>
 
