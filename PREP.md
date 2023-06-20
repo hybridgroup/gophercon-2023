@@ -53,11 +53,11 @@ Please add whatever checklist items needed here...
 
 ### Spheros
 
-- [ ] check batteries
+- [X] check batteries
 - [X] USB charger
 - [ ] OS check
-    - [ ] Linux
-    - [ ] macOS
+    - [X] Linux
+    - [X] macOS
     - [ ] Windows
 
 ### Gopherbots
