@@ -65,7 +65,9 @@ Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
 #### Parrot Minidrones
 
-We have two Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
+![Parrot Minidrone](https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Rolling_Spider.jpg/320px-Rolling_Spider.jpg)
+
+We have three Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
 
 Post in-flight videos using hashtag #gopherconeu
 
