@@ -74,17 +74,15 @@ There are several different kinds of controllers in this folder, which are progr
 
 This introductory MIDI controller sends only a single note. It is designed to connect to some conductive items such as a banana or other piece of fruit.
 
-- Connect one of the "Ground" pins on the Arduino to the breadboard's ground rail (-) using a black or brown jumper cable.
+- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (-) using a black or brown jumper cable.
 
-- Connect the "3.3V" pin on the Arduino to the breadboard's power rail (+) using a red jumper cable.
+- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (+) using a red jumper cable.
 
-- Connect one of the 10M Ohm resistors from one of the available pins in row 9 on the breadboard, to the breadboard's power rail (+).
+- Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
 
-- Connect a black cable to the breadboard's ground rail (-). You will hold this cable to serve as the ground.
+- Connect a yellow cable from the pin A on the MakeyBoard to pin D12 on the Arduino.
 
-- Connect a red cable to one of the other available pins in row 9 on the breadboard, and then plug in into your piece of fruit.
-
-- Connect a yellow cable from one of the other available pins in row 9 on the breadboard to pin D12 on the Arduino.
+- Connect a red alligator cable to the connector A and then plug in into your piece of fruit.
 
 To build/flash the `onenote` example on Arduino Nano RP2040:
 
@@ -92,8 +90,56 @@ To build/flash the `onenote` example on Arduino Nano RP2040:
 
 Touch the black ground cable, and then also touch the piece of fruit.
 
-This should send MIDI messages tht can trigger sounds on your computer by using your Arduino MIDI controller.
+This should send MIDI messages that can trigger sounds on your computer by using your Arduino MIDI controller.
 
 Launch one of the online synths. You should be able to use your new custom MIDI controller to make music.
 
 Have fun!
+
+### chorder
+
+This MIDI controller sends entire chords with a single touch. It uses the exact same wiring setup as the `onenote` program.
+
+Each time you touch the controller, it will play the next chord in the programmed chord progression.
+
+To build/flash the `chorder` program on Arduino Nano RP2040:
+
+        tinygo flash -target nano-rp2040 ./chorder/
+
+Touch the black ground cable, and then also touch the piece of fruit.
+
+This should also send MIDI messages that can trigger sounds on your computer by using your Arduino MIDI controller.
+
+Launch one of the online synths. You should be able to use your new custom MIDI controller to make music.
+
+Have fun!
+
+### foamaphone
+
+This MIDI controller sends four different note. It is designed to connect to some conductive foil attached to anything non-conductive, such as a piece of paper.
+
+- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (-) using a black or brown jumper cable.
+
+- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (+) using a red jumper cable.
+
+- Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
+
+- Connect a cable from the pin A on the MakeyBoard to pin D2 on the Arduino.
+
+- Connect a cable from the pin B on the MakeyBoard to pin D4 on the Arduino.
+
+- Connect a cable from the pin C on the MakeyBoard to pin D6 on the Arduino.
+
+- Connect a cable from the pin D on the MakeyBoard to pin D8 on the Arduino.
+
+- Connect an alligator cable to the connector A and then connect to one isolated piece of copper foil, or anything else that conducts.
+
+- Connect an alligator cable to the connector B and then connect to one isolated piece of copper foil, or anything else that conducts. Make sure you connect it to something else other than what the first cable is connected to.
+
+- Connect an alligator cable to connector C, keeping it separate from A or B.
+
+- Finally, do the same with the fourth alligator cable and connector D.
+
+To build/flash the `foamaphone` program on Arduino Nano RP2040:
+
+        tinygo flash -target nano-rp2040 ./foamaphone/
