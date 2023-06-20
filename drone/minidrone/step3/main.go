@@ -3,71 +3,67 @@ package main
 import (
 	"fmt"
 	"os"
+	"sync"
 	"time"
 
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/ble"
-	"gobot.io/x/gobot/platforms/parrot/minidrone"
+	"gobot.io/x/gobot/v2/platforms/ble"
+	"gobot.io/x/gobot/v2/platforms/parrot/minidrone"
+)
+
+var (
+	drone         *minidrone.Driver
+	flightPattern sync.Once
 )
 
 func main() {
 	bleAdaptor := ble.NewClientAdaptor(os.Args[1])
-	drone := minidrone.NewDriver(bleAdaptor)
+	bleAdaptor.Connect()
 
-	work := func() {
-		drone.On(drone.Event("battery"), func(data interface{}) {
-			fmt.Printf("battery: %d\n", data)
-		})
+	drone = minidrone.NewDriver(bleAdaptor)
+	drone.Start()
 
-		drone.On(minidrone.Hovering, func(data interface{}) {
-			fmt.Println("hovering!")
-		})
+	go func() {
+		droneEvents := drone.Subscribe()
 
-		drone.On(minidrone.Landing, func(data interface{}) {
-			fmt.Println("landing!")
-		})
+		for event := range droneEvents {
+			fmt.Println("Event:", event.Name, event.Data)
+		}
+	}()
 
-		drone.On(minidrone.Landed, func(data interface{}) {
-			fmt.Println("landed.")
-		})
+	time.Sleep(2 * time.Second)
+	fmt.Println("takeoff...")
+	drone.TakeOff()
 
-		drone.TakeOff()
-		gobot.After(10*time.Second, func() {
-			fmt.Println("forwards...")
-			drone.Forward(5)
-		})
-		gobot.After(12*time.Second, func() {
-			fmt.Println("backwards...")
-			drone.Backward(10)
-		})
-		gobot.After(14*time.Second, func() {
-			fmt.Println("hovering...")
-			drone.Stop()
-		})
+	start := time.Now()
+	for {
+		if time.Since(start) > 5*time.Second {
+			flightPattern.Do(func() {
+				go flySimpleMovements()
+			})
+		}
 
-		gobot.After(20*time.Second, func() {
-			fmt.Println("right...")
-			drone.Right(5)
-		})
-		gobot.After(22*time.Second, func() {
-			fmt.Println("left...")
-			drone.Left(10)
-		})
-		gobot.After(24*time.Second, func() {
-			fmt.Println("hovering...")
-			drone.Stop()
-		})
-		gobot.After(30*time.Second, func() {
+		if time.Since(start) > 20*time.Second {
 			fmt.Println("landing...")
 			drone.Land()
-		})
+			return
+		}
+
+		time.Sleep(time.Second)
 	}
+}
 
-	robot := gobot.NewRobot("minidrone",
-		[]gobot.Connection{bleAdaptor},
-		[]gobot.Device{drone},
-		work,
-	)
-
-	robot.Start()
+func flySimpleMovements() {
+	drone.Forward(20)
+	time.Sleep(time.Second * 3)
+	drone.Forward(0)
+	drone.Backward(20)
+	time.Sleep(time.Second * 3)
+	drone.Backward(0)
+	drone.Left(20)
+	time.Sleep(time.Second * 3)
+	drone.Left(0)
+	drone.Right(20)
+	time.Sleep(time.Second * 3)
+	drone.Right(0)
+	drone.Land()
 }

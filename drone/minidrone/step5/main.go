@@ -24,10 +24,10 @@ import (
 
 	"runtime"
 
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/ble"
-	"gobot.io/x/gobot/platforms/joystick"
-	"gobot.io/x/gobot/platforms/parrot/minidrone"
+	gobot "gobot.io/x/gobot/v2"
+	"gobot.io/x/gobot/v2/platforms/ble"
+	"gobot.io/x/gobot/v2/platforms/joystick"
+	"gobot.io/x/gobot/v2/platforms/parrot/minidrone"
 )
 
 type pair struct {

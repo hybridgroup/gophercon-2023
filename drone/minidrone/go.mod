@@ -20,6 +20,7 @@ require (
 	github.com/saltosystems/winrt-go v0.0.0-20230510070731-e096b9afa761 // indirect
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/tinygo-org/cbgo v0.0.4 // indirect
+	github.com/veandco/go-sdl2 v0.4.25 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	tinygo.org/x/bluetooth v0.7.0 // indirect
 )
