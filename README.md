@@ -93,9 +93,11 @@ We can make beautiful music together, just go to [./musicjam/](./musicjam/).
 
 ### Sphero Ollie robots
 
+![Sphero Ollie](./images/ollie.jpg)
+
 Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon EU! These fast Bluetooth controlled robotic toys have long been a Go programmer fan favorite.
 
-There are 3 Sphero Ollie robots to help satisfy your need for speed.
+There are 4 Sphero Ollie robots to help satisfy your need for speed.
 
 Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 

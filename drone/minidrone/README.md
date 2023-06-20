@@ -30,9 +30,10 @@ When running the code using macOS you should use the name. If you are running th
 The name of the drone should be listed on the side of it. You can lookup the correct MAC address in the following table.
 
 |Name|MAC Address|
+|----|-----------|
 |Travis_056919|E0:14:5D:F0:3D:A4|
-|Drone 2||
-|Drone 3||
+|Drone 2|XX|
+|Drone 3|XX|
 
 
 ## Code
