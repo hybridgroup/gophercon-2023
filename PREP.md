@@ -1,5 +1,9 @@
 # Preparation checklist
 
+## Gopher Badges
+
+Please add whatever checklist items needed here...
+
 ## Drones
 
 ### Tello
@@ -50,7 +54,11 @@
 ### Spheros
 
 - [ ] check batteries
-- [ ] USB charger
+- [X] USB charger
+- [ ] OS check
+    - [ ] Linux
+    - [ ] macOS
+    - [ ] Windows
 
 ### Gopherbots
 
@@ -58,3 +66,8 @@
 - [ ] cables
 - [ ] add bluetooth tutorial/examples
 
+## Raspberry Pi "proxies"
+
+- [ ] Flash latest raspbian on SD cards
+- [ ] install TinyGo dependencies
+- [ ] prepare for connecting to wifi at venue
