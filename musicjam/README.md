@@ -60,11 +60,15 @@ https://experiments.withgoogle.com/ai/sound-maker/view/
 
 ## Controller
 
+![MakeyBoard](../images/makeyboard.jpg)
+
 The MIDI Controller is intended to run directly on Arduino to send MIDI commands via the USB interface.
 
-There are several different kinds of controllers in this folder.
+We have 4 "MakeyButton" boards, which make it possible to become part of the circuit in a very literal sense by using your own body and conductive items to control the music.
 
-We also have some "MakeyButton" boards, which make it possible to become part of the circuit in a very literal sense by using your own body and conductive items to control the music.
+You can also use your Arduino as a USB MIDI controller without the "MakeyButton" boards if you prefer to use push buttons or some other sensors.
+
+There are several different kinds of controllers in this folder, which are programs you flash onto your Arduino board and then by connecting the right hardware can use it to control the virtual instruments running on your computer.
 
 ### onenote
 

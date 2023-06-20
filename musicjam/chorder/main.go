@@ -2,7 +2,7 @@ package main
 
 import (
 	"machine"
-	"machine/usb/midi"
+	"machine/usb/adc/midi"
 	"time"
 
 	"tinygo.org/x/drivers/makeybutton"
@@ -13,8 +13,8 @@ const (
 )
 
 var (
-	buttonC machine.Pin = machine.D12
-	midichannel uint8 = 0 // MIDI channels are 0-15 e.g. 1-16
+	buttonC     machine.Pin = machine.D12
+	midichannel uint8       = 0 // MIDI channels are 0-15 e.g. 1-16
 
 	chords = []struct {
 		name string
@@ -28,8 +28,6 @@ var (
 )
 
 func main() {
-	m := midi.New()
-
 	key := makeybutton.NewButton(buttonC)
 	key.Configure()
 
@@ -39,11 +37,11 @@ func main() {
 		switch key.Get() {
 		case makeybutton.Pressed:
 			for _, c := range chords[index].keys {
-				m.NoteOn(0, 0, c, 0x40)
+				midi.Port().NoteOn(0, 0, c, 0x40)
 			}
 		case makeybutton.Released:
 			for _, c := range chords[index].keys {
-				m.NoteOff(0, 0, c, 0x40)
+				midi.Port().NoteOff(0, 0, c, 0x40)
 			}
 			index = (index + 1) % len(chords)
 		}
