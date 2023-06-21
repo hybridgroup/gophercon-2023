@@ -74,9 +74,9 @@ There are several different kinds of controllers in this folder, which are progr
 
 This introductory MIDI controller sends only a single note. It is designed to connect to some conductive items such as a banana or other piece of fruit.
 
-- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (-) using a black or brown jumper cable.
+- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (labeled X) using a black or brown jumper cable.
 
-- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (+) using a red jumper cable.
+- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (labeled W) using a red jumper cable.
 
 - Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
 
@@ -118,27 +118,27 @@ Have fun!
 
 This MIDI controller sends four different note. It is designed to connect to some conductive foil attached to anything non-conductive, such as a piece of paper.
 
-- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (-) using a black or brown jumper cable.
+- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (labeled X) using a black or brown jumper cable.
 
-- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (+) using a red jumper cable.
+- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (labeled W) using a red jumper cable.
 
 - Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
 
 - Connect a cable from the pin A on the MakeyBoard to pin D2 on the Arduino.
 
-- Connect a cable from the pin B on the MakeyBoard to pin D4 on the Arduino.
+- Connect a cable from the pin D on the MakeyBoard to pin D4 on the Arduino.
 
-- Connect a cable from the pin C on the MakeyBoard to pin D6 on the Arduino.
+- Connect a cable from the pin G on the MakeyBoard to pin D6 on the Arduino.
 
-- Connect a cable from the pin D on the MakeyBoard to pin D8 on the Arduino.
+- Connect a cable from the pin J on the MakeyBoard to pin D8 on the Arduino.
 
 - Connect an alligator cable to the connector A and then connect to one isolated piece of copper foil, or anything else that conducts.
 
-- Connect an alligator cable to the connector B and then connect to one isolated piece of copper foil, or anything else that conducts. Make sure you connect it to something else other than what the first cable is connected to.
+- Connect an alligator cable to the connector D and then connect to one isolated piece of copper foil, or anything else that conducts. Make sure you connect it to something else other than what the first cable is connected to.
 
-- Connect an alligator cable to connector C, keeping it separate from A or B.
+- Connect an alligator cable to connector G, keeping it separate from A or D.
 
-- Finally, do the same with the fourth alligator cable and connector D.
+- Finally, do the same with the fourth alligator cable and connector J.
 
 To build/flash the `foamaphone` program on Arduino Nano RP2040:
 
