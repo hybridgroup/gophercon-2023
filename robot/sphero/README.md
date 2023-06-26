@@ -112,7 +112,7 @@ When the heartbeat data is received from MQTT server, the built-in LED will chan
 Run the following command to control your robot:
 
 ```
-go run ./step5/ D6:5F:69:D6:5F:6A tcp://test.mosquitto.org:1883
+go run ./step5/ [MAC address or Bluetooth ID] tcp://test.mosquitto.org:1883
 ```
 
 First press and release the ESC key, and then press "Control-C" to stop the robot program. 
