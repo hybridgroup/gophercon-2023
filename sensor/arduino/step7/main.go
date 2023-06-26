@@ -18,15 +18,15 @@ import (
 )
 
 var (
-	green   = machine.D12
-	red  = machine.D10
+	green  = machine.D12
+	red    = machine.D10
 	button = machine.D11
 	touch  = machine.D9
 	bzrPin = machine.D8
 
-	bzr      buzzer.Device
-	dial     = machine.ADC{machine.ADC0}
-	pwm      = machine.PWM2 // PWM2 corresponds to Pin D10.
+	bzr    buzzer.Device
+	dial   = machine.ADC{machine.ADC0}
+	pwm    = machine.PWM2 // PWM2 corresponds to Pin D10.
 	redPwm uint8
 
 	dialValue  uint16
@@ -50,6 +50,8 @@ var (
 	ssid string
 	pass string
 )
+
+const retriesBeforeFailure = 3
 
 // IP address of the MQTT broker to use. Replace with your own info, if so desired.
 var server = "tcp://test.mosquitto.org:1883"
@@ -174,20 +176,19 @@ func initAdaptor() {
 // connect to access point
 func connectToAP() {
 	time.Sleep(2 * time.Second)
-	println("Connecting to " + ssid)
-	err := adaptor.ConnectToAccessPoint(ssid, pass, 10*time.Second)
-	if err != nil { // error connecting to AP
-		failMessage(err.Error())
+	var err error
+	for i := 0; i < retriesBeforeFailure; i++ {
+		println("Connecting to " + ssid)
+		err = adaptor.ConnectToAccessPoint(ssid, pass, 10*time.Second)
+		if err == nil {
+			println("Connected.")
+
+			return
+		}
 	}
 
-	println("Connected.")
-
-	ip, _, _, err := adaptor.GetIP()
-	for ; err != nil; ip, _, _, err = adaptor.GetIP() {
-		println(err.Error())
-		time.Sleep(1 * time.Second)
-	}
-	println(ip.String())
+	// error connecting to AP
+	failMessage(err.Error())
 }
 
 func connectToMQTT() {
