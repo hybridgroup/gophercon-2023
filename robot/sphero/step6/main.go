@@ -11,6 +11,8 @@ import (
 	"gobot.io/x/gobot/v2/platforms/sphero/ollie"
 )
 
+const mqtttopic = "tinygo/hacksession/heartbeat"
+
 func main() {
 	bleAdaptor := ble.NewClientAdaptor(os.Args[1])
 	rover := ollie.NewDriver(bleAdaptor)
@@ -18,7 +20,7 @@ func main() {
 	mqttAdaptor := mqtt.NewAdaptor(os.Args[2], "rover")
 	mqttAdaptor.SetAutoReconnect(true)
 
-	heartbeat := mqtt.NewDriver(mqttAdaptor, "basestation/heartbeat")
+	heartbeat := mqtt.NewDriver(mqttAdaptor, mqtttopic)
 
 	keys := keyboard.NewDriver()
 

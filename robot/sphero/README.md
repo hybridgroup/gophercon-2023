@@ -78,32 +78,55 @@ go run ./step4/ [MAC address or Bluetooth ID]
 
 ### step5
 
-This step has us receiving a heartbeat signal from the "base station" using the MQTT machine to machine messaging protocol. No additional hardware needs to be connected. 
+This step has us receiving a heartbeat signal from the "base station" using the MQTT machine to machine messaging protocol. No additional hardware needs to be connected.
 
-You will need the server location of the MQTT server to use for the base station.
+You will need to install the Mosquitto MQTT client tools:
 
-When the heartbeat data is received from the base station, the built-in LED will change color.
+Linux - `sudo apt install -y mosquitto-clients`
 
+macOS - `brew install mosquitto-clients`
+
+Windows - `scoop install mosquitto`
+
+You will need the server location of the MQTT server to use:
+
+`tcp://test.mosquitto.org:1883`
+
+When the heartbeat data is received from MQTT server, the built-in LED will change to a random color.
+
+Run the following command to control your robot:
 
 ```
-go run ./step5/ [MAC address or Bluetooth ID] [need this info]
+go run ./step5/ D6:5F:69:D6:5F:6A tcp://test.mosquitto.org:1883
 ```
+
+You can send data to all of the connected robots by running the following command:
+
+`mosquitto_pub -h test.mosquitto.org -t tinygo/hacksession/heartbeat -m hello`
 
 ### step6
 
-Control robot using keyboard to collect data and send to base station.
+Control robot using keyboard, receive data from server base station.
 
 ```
-go run ./step6/ [MAC address or Bluetooth ID] [need this info]
+go run ./step6/ [MAC address or Bluetooth ID] tcp://test.mosquitto.org:1883
 ```
+
+You can send data to all of the connected robots by running the following command:
+
+`mosquitto_pub -h test.mosquitto.org -t tinygo/hacksession/heartbeat -m hello`
 
 ### step7
 
-Control robot using keyboard to collect data and send to base station.
+Control robot using keyboard, both receive data and also send collision data to server.
 
 ```
-go run ./step7/ [MAC address or Bluetooth ID] [need this info]
+go run ./step7/ [MAC address or Bluetooth ID] tcp://test.mosquitto.org:1883
 ```
+
+To see the data being sent from each robot you can run the following command:
+
+`mosquitto_sub -h test.mosquitto.org -t tinygo/hacksession/collision/#`
 
 ## License
 

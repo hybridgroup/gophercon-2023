@@ -11,6 +11,8 @@ import (
 	"gobot.io/x/gobot/v2/platforms/sphero/ollie"
 )
 
+const mqtttopic = "tinygo/hacksession/heartbeat"
+
 func main() {
 	bleAdaptor := ble.NewClientAdaptor(os.Args[1])
 	rover := ollie.NewDriver(bleAdaptor)
@@ -18,16 +20,11 @@ func main() {
 	mqttAdaptor := mqtt.NewAdaptor(os.Args[2], "rover")
 	mqttAdaptor.SetAutoReconnect(true)
 
-	heartbeat := mqtt.NewDriver(mqttAdaptor, "basestation/heartbeat")
+	heartbeat := mqtt.NewDriver(mqttAdaptor, mqtttopic)
 
 	work := func() {
-		rover.On("collision", func(data interface{}) {
-			fmt.Printf("collision detected = %+v \n", data)
-			rover.SetRGB(255, 0, 0)
-		})
-
 		heartbeat.On(mqtt.Data, func(data interface{}) {
-			fmt.Println("heartbeat")
+			fmt.Println("heartbeat received")
 			r := uint8(gobot.Rand(255))
 			g := uint8(gobot.Rand(255))
 			b := uint8(gobot.Rand(255))

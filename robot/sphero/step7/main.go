@@ -17,11 +17,13 @@ import (
 var robot *gobot.Robot
 var mqttAdaptor *mqtt.Adaptor
 
+const mqtttopic = "tinygo/hacksession/heartbeat"
+
 func ReportCollision(data interface{}) {
 	buf := new(bytes.Buffer)
 	msg, _ := json.Marshal(data)
 	binary.Write(buf, binary.LittleEndian, msg)
-	mqttAdaptor.Publish("rovers/"+robot.Name+"/collision", buf.Bytes())
+	mqttAdaptor.Publish("tinygo/hacksession/collision/"+robot.Name, buf.Bytes())
 }
 
 func main() {
@@ -31,7 +33,7 @@ func main() {
 	mqttAdaptor = mqtt.NewAdaptor(os.Args[2], "rover")
 	mqttAdaptor.SetAutoReconnect(true)
 
-	heartbeat := mqtt.NewDriver(mqttAdaptor, "basestation/heartbeat")
+	heartbeat := mqtt.NewDriver(mqttAdaptor, mqtttopic)
 
 	keys := keyboard.NewDriver()
 
