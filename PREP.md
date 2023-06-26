@@ -22,30 +22,32 @@ Please add whatever checklist items needed here...
 
 - [X] batteries
 - [X] chargers
-- [ ] complete steps 2-5+
-- [ ] test joysticks
+- [X] complete steps 2-5+
+- [X] test joysticks
 - [ ] flightbadge
 - [ ] OS check
-    - [ ] Linux
+    - [X] Linux
     - [ ] macOS
     - [ ] Windows
 
 ## Music Jam
 
-- [ ] organize parts kits
-- [ ] sound cables
+- [X] update code
+- [X] organize parts kits
+- [X] dupont M2F cables
+- [X] sound cables
 - [ ] OS check
-    - [ ] Linux
+    - [X] Linux
     - [ ] macOS
     - [ ] Windows
 
 ## Arduino IoT
 
-- [ ] organize parts kits
-- [ ] update for latest drivers wifinina
-- [ ] insert step 7a for wifi connection
+- [X] organize parts kits
+- [X] update for latest drivers wifinina
+- [X] add apconnect tool
 - [ ] OS check
-    - [ ] Linux
+    - [X] Linux
     - [ ] macOS
     - [ ] Windows
 
@@ -62,8 +64,8 @@ Please add whatever checklist items needed here...
 
 ### Gopherbots
 
-- [ ] batteries
-- [ ] cables
+- [X] batteries
+- [X] cables
 - [ ] add bluetooth tutorial/examples
 
 ## Raspberry Pi "proxies"
