@@ -109,26 +109,14 @@ IMPORTANT NOTE: you must press the "P3" button when your program first runs for 
 
 **Windows**:
 
-1. Download and install the mingw-w64 compiler:
-
-https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/mingw-w64-v8.0.2.tar.bz2/download
-
-2. Download and install SDL2:
-
-http://libsdl.org/release/SDL2-2.0.22-win32-x64.zip
-
-- Extract the SDL2 folder from the archive using a tool like 7zip
-- Inside the folder, copy the x86_64-w64-mingw32 files into your mingw-w64 folder e.g. C:\Program Files\mingw-w64\x86_64-8.0.2-win32-seh-rt_v6\mingw64
-
-3. Setup Path environment variable:
-
-Put your mingw-w64 binaries location into your system Path environment variable. e.g C:\Program Files\mingw-w64\x86_64-8.0.2-win32-seh-rt_v6\mingw64\x86_64-w64-mingw32\bin
-
-4. Install go-sdl2:
-
-```
-go get -v github.com/veandco/go-sdl2/sdl@master
-```
+1. Install mingw-w64 from [Mingw-builds](https://github.com/niXman/mingw-builds-binaries/releases). A 7z archive extractor software might be needed which can be downloaded [here](https://www.7-zip.org/download.html). In this example, we extract the content, which is `mingw64`, into `C:\`.
+2. Download and install `SDL2-devel-[version]-mingw.zip` files from https://github.com/libsdl-org/SDL/releases.
+    * Extract the SDL2 folder from the archive using a tool like [7zip](http://7-zip.org)
+    * Inside the extracted SDL2 folder, copy the `i686-w64-mingw32` and/or `x86_64-w64-mingw32` into mingw64 folder e.g. `C:\mingw64`
+3. Setup `Path` environment variable
+    * Put mingw-w64 binaries location into system `Path` environment variable (e.g. `C:\mingw64\bin`)
+4. Close and open terminal again so the new `Path` environment variable takes effect. Now we should be able to run `go build` inside the project directory.
+5. Download and install SDL2 runtime libraries from https://github.com/libsdl-org/SDL/releases. Extract and copy the `.dll` file into the project directory. After that, the program should become runnable.
 
 `go run ./step5/main.go [MAC address]`
 
