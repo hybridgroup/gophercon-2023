@@ -3,17 +3,24 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	gobot "gobot.io/x/gobot/v2"
 	"gobot.io/x/gobot/v2/platforms/ble"
-	"gobot.io/x/gobot/v2/platforms/keyboard"
 	"gobot.io/x/gobot/v2/platforms/mqtt"
 	"gobot.io/x/gobot/v2/platforms/sphero/ollie"
+
+	term "github.com/nsf/termbox-go"
 )
 
 const mqtttopic = "tinygo/hacksession/heartbeat"
 
 func main() {
+	err := term.Init()
+	if err != nil {
+		panic(err)
+	}
+
 	bleAdaptor := ble.NewClientAdaptor(os.Args[1])
 	rover := ollie.NewDriver(bleAdaptor)
 
@@ -21,8 +28,6 @@ func main() {
 	mqttAdaptor.SetAutoReconnect(true)
 
 	heartbeat := mqtt.NewDriver(mqttAdaptor, mqtttopic)
-
-	keys := keyboard.NewDriver()
 
 	work := func() {
 		rover.On("collision", func(data interface{}) {
@@ -38,27 +43,47 @@ func main() {
 			rover.SetRGB(r, g, b)
 		})
 
-		keys.On(keyboard.Key, func(data interface{}) {
-			key := data.(keyboard.KeyEvent)
+		defer term.Close()
 
-			switch key.Key {
-			case keyboard.ArrowUp:
-				rover.Roll(40, 0)
-			case keyboard.ArrowRight:
-				rover.Roll(40, 90)
-			case keyboard.ArrowDown:
-				rover.Roll(40, 180)
-			case keyboard.ArrowLeft:
-				rover.Roll(40, 270)
-			case keyboard.Spacebar:
-				rover.Stop()
+		for {
+			switch ev := term.PollEvent(); ev.Type {
+			case term.EventKey:
+				switch ev.Key {
+				case term.KeyEsc:
+					term.Sync()
+					fmt.Println("exiting...")
+					return
+				default:
+					term.Sync()
+					// WSAD to control forward, backward, left, and right
+					switch ev.Ch {
+					case 'w':
+						fmt.Println("forward...")
+						rover.Roll(60, 0)
+					case 's':
+						fmt.Println("backward...")
+						rover.Roll(60, 180)
+					case 'a':
+						fmt.Println("left...")
+						rover.Roll(60, 270)
+					case 'd':
+						fmt.Println("right...")
+						rover.Roll(60, 90)
+					default:
+						rover.Stop()
+					}
+				}
+			case term.EventError:
+				panic(ev.Err)
 			}
-		})
+
+			time.Sleep(100 * time.Millisecond)
+		}
 	}
 
 	robot := gobot.NewRobot("rover",
 		[]gobot.Connection{bleAdaptor, mqttAdaptor},
-		[]gobot.Device{rover, keys},
+		[]gobot.Device{rover},
 		work,
 	)
 

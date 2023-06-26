@@ -34,7 +34,14 @@ The number of the robot should be listed on the side of it. You can lookup the c
 |3|2B-5F6A|D6:5F:69:D6:5F:6A|
 |4|2B-DE50|E0:4A:58:0C:DE:50|
 
-To find out the unique Bluetooth ID assigned to that device from macOS, you can use the Bluetooth scanner located in the `tools/blescanner` directory of this repo.
+To find out the unique Bluetooth ID assigned to that device from macOS, you can use the Bluetooth scanner located in the `tools/blescanner` directory of this repo:
+
+```
+cd tools
+go run ./blescanner
+```
+
+Press "Control-C" to stop the `blescanner` program. 
 
 ## Code
 
@@ -46,6 +53,8 @@ This tests that the Sphero Ollie is connected correctly to your computer, by bli
 go run ./step1/ [MAC address or Bluetooth ID]
 ```
 
+Press "Control-C" to stop the program. 
+
 ### step2
 
 Rolls around at random.
@@ -54,13 +63,17 @@ Rolls around at random.
 go run ./step2/ [MAC address or Bluetooth ID]
 ```
 
+Press "Control-C" to stop the program. 
+
 ### step3
 
-Gets collision notifications from robot.
+Rolls around at random and displays collision notifications from robot in your terminal.
 
 ```
 go run ./step3/ [MAC address or Bluetooth ID]
 ```
+
+Press "Control-C" to stop the program. 
 
 ### step4
 
@@ -75,6 +88,8 @@ go run ./step4/ [MAC address or Bluetooth ID]
 `s` - backward
 `d` - right
 `ESC`, `CTRL-C` - exit
+
+First press and release the ESC key, and then press "Control-C" to stop the program.
 
 ### step5
 
@@ -100,9 +115,13 @@ Run the following command to control your robot:
 go run ./step5/ D6:5F:69:D6:5F:6A tcp://test.mosquitto.org:1883
 ```
 
+First press and release the ESC key, and then press "Control-C" to stop the robot program. 
+
 You can send data to all of the connected robots by running the following command:
 
 `mosquitto_pub -h test.mosquitto.org -t tinygo/hacksession/heartbeat -m hello`
+
+Note that you will need to do this while the robot program is running, from another terminal window.
 
 ### step6
 
