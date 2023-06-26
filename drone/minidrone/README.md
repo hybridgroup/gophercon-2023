@@ -109,6 +109,10 @@ IMPORTANT NOTE: you must press the "P3" button when your program first runs for 
 
 **Windows**:
 
+***NOTE***
+
+Windows might not be working with SDL2 at the moment.
+
 1. Install mingw-w64 from [Mingw-builds](https://github.com/niXman/mingw-builds-binaries/releases). A 7z archive extractor software might be needed which can be downloaded [here](https://www.7-zip.org/download.html). In this example, we extract the content, which is `mingw64`, into `C:\`.
 2. Download and install `SDL2-devel-[version]-mingw.zip` files from https://github.com/libsdl-org/SDL/releases.
     * Extract the SDL2 folder from the archive using a tool like [7zip](http://7-zip.org)
