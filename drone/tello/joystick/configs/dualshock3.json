@@ -22,71 +22,55 @@
     "buttons": [
         {
             "name": "square",
-            "id": 15
-        },
-        {
-            "name": "triangle",
-            "id": 12
-        },
-        {
-            "name": "circle",
-            "id": 13
-        },
-        {
-            "name": "x",
-            "id": 14
-        },
-        {
-            "name": "up",
-            "id": 4
-        },
-        {
-            "name": "down",
-            "id": 6
-        },
-        {
-            "name": "left",
-            "id": 7
-        },
-        {
-            "name": "right",
-            "id": 5
-        },
-        {
-            "name": "left_stick",
-            "id": 1
-        },
-        {
-            "name": "right_stick",
             "id": 2
         },
         {
-            "name": "l1",
-            "id": 10
-        },
-        {
-            "name": "l2",
-            "id": 8
-        },
-        {
-            "name": "r1",
-            "id": 11
-        },
-        {
-            "name": "r2",
-            "id": 9
-        },
-        {
-            "name": "start",
+            "name": "triangle",
             "id": 3
         },
         {
-            "name": "select",
+            "name": "circle",
+            "id": 1
+        },
+        {
+            "name": "x",
             "id": 0
         },
         {
+            "name": "up",
+            "id": 11
+        },
+        {
+            "name": "down",
+            "id": 12
+        },
+        {
+            "name": "left",
+            "id": 13
+        },
+        {
+            "name": "right",
+            "id": 14
+        },
+        {
+            "name": "l1",
+            "id": 9
+        },
+        {
+            "name": "r1",
+            "id": 10
+        },
+        {
+            "name": "start",
+            "id": 6
+        },
+        {
+            "name": "select",
+            "id": 4
+        },
+        {
             "name": "home",
-            "id": 16
+            "id": 5
         }
     ]
 }
