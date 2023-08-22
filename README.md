@@ -27,7 +27,7 @@ Now you are ready to install TinyGo.
 
 ### Install TinyGo
 
-You will need to install TinyGo 0.28.0 in order to do today's activities.
+You will need to install TinyGo 0.28.1 in order to do today's activities.
 
 https://tinygo.org/getting-started/install/
 

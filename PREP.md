@@ -57,10 +57,10 @@ Please add whatever checklist items needed here...
 
 - [X] check batteries
 - [X] USB charger
-- [ ] OS check
+- [X] OS check
     - [X] Linux
     - [X] macOS
-    - [ ] Windows
+    - [X] Windows
 
 ### Gopherbots
 

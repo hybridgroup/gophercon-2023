@@ -4,6 +4,8 @@
 
 Some unfriendly IT departments might not allow access to the USB ports on your corporate laptop. :(
 
-One option is to pair up with someone else, which is a big part of the fun.
+The best option is to pair up with someone else, which is a big part of the fun.
 
-We have also brought a couple of Raspberry Pi computers for you to SSH into and use to flash boards. Please let us know if you need help with this. 
+## My Gopher Badge is not powering up with battery connected
+
+If your battery is connected and switching your badge to ON doesn't power it up, **disconnect your battery, switch to ON and connect your battery again**. If it doesn't power up, then check the battery charge.
