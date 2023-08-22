@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gopherconeu-2022/drone/tello
+module github.com/hybridgroup/gophercon-2022/drone/tello
 
 go 1.18
 

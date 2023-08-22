@@ -1,8 +1,8 @@
-# Gophercon.EU 2022
+# Gophercon 2023
 
-The is the repository for the hardware hack session at Gophercon.EU 2023.
+The is the repository for the hardware hack session at Gophercon 2023.
 
-https://gophercon.eu/
+https://gophercon.com/
 
 ### Please return all loaner equipment when you are finished for the next person. Thank you!
 
@@ -13,13 +13,13 @@ https://gophercon.eu/
 First use git to clone this repo to your local machine:
 
 ```
-git clone https://github.com/hybridgroup/gopherconeu-2023.git
-cd gopherconeu-2023
+git clone https://github.com/hybridgroup/gophercon-2023.git
+cd gophercon-2023
 ```
 
-### Install Go 1.20
+### Install Go 1.21
 
-If somehow you have not installed Go 1.20 on your computer already, you can download it here:
+If somehow you have not installed Go 1.21 on your computer already, you can download it here:
 
 https://go.dev/dl/
 
@@ -27,15 +27,15 @@ Now you are ready to install TinyGo.
 
 ### Install TinyGo
 
-You will need to install TinyGo 0.28.1 in order to do today's activities.
+You will need to install TinyGo 0.29.0 in order to do today's activities.
 
 https://tinygo.org/getting-started/install/
 
 ## Activities
 
-### Gopher Badge Hacking
+### GoBadge Hacking
 
-If you are one of the very fortunate individuals to have received a Gopher Badge, it is in fact yours to keep!
+If you are one of the very fortunate individuals to have received a GoBadge, it is in fact yours to keep!
 
 Go to https://gopherbadge.com/ for more info.
 
@@ -59,7 +59,7 @@ Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get start
 
 We have three DJI Tello drones for your Go-powered flying activities.
 
-In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gopherconeu
+In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
 
 Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
@@ -69,7 +69,7 @@ Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
 We have three Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
 
-Post in-flight videos using hashtag #gopherconeu
+Post in-flight videos using hashtag #gophercon
 
 Ready for takeoff? Go to [./drone/minidrone/](./drone/minidrone/).
 

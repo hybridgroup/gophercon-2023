@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gopherconeu-2022/drone/minidrone
+module github.com/hybridgroup/gophercon-2022/drone/minidrone
 
 go 1.19
 

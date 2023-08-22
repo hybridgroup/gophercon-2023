@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gopherconeu/tools
+module github.com/hybridgroup/gophercon-2022/tools
 
 go 1.20
 
