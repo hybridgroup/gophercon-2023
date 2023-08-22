@@ -112,8 +112,7 @@ func printFlightData(d *tello.FlightData) {
 	displayData := `
 Height:         %d
 Ground Speed:   %d
-Light Strength: %d
 
 `
-	fmt.Printf(displayData, d.Height, d.GroundSpeed, d.LightStrength)
+	fmt.Printf(displayData, d.Height, d.GroundSpeed)
 }
