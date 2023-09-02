@@ -1,6 +1,6 @@
 # TinyGo Music Jam
 
-Make music using your own Arduino-based customized MIDI controller using audio software running on your notebook computer.
+Make music using your own TinyGo-based customized MIDI controller using audio software running on your notebook computer.
 
 ```
 ┌────────────────────────────┐      ┌────────────────────────────────────────────────┐
@@ -33,7 +33,7 @@ Make music using your own Arduino-based customized MIDI controller using audio s
 │                            │      │                                                │
 └────────────────────────────┘      └────────────────────────────────────────────────┘
 
-  Arduino                             Computer
+  Arduino/GoBadge                     Computer
 
 ```
 
@@ -58,88 +58,18 @@ https://virtualpiano.eu/
 
 https://experiments.withgoogle.com/ai/sound-maker/view/
 
-## Controller
+## Hardware Controller
 
-![MakeyBoard](../images/makeyboard.jpg)
+If you have a GoBadge you can use it as your MIDI controller.
 
-The MIDI Controller is intended to run directly on Arduino to send MIDI commands via the USB interface.
+You can also use an Arduino RP2040 board along with one of the button kits that we have brought with us.
 
-We have 4 "MakeyButton" boards, which make it possible to become part of the circuit in a very literal sense by using your own body and conductive items to control the music.
+All of the musical activities can be done with either hardware setup.
 
-You can also use your Arduino as a USB MIDI controller without the "MakeyButton" boards if you prefer to use push buttons or some other sensors.
+Each of the TinyGo programs for the MIDI Controller is intended to run directly on the hardware to send MIDI commands via the USB interface to your computer.
 
-There are several different kinds of controllers in this folder, which are programs you flash onto your Arduino board and then by connecting the right hardware can use it to control the virtual instruments running on your computer.
+There are several different kinds of controllers in this folder, which are programs you flash onto your board and then by connecting the right hardware can use it to control the virtual instruments running on your computer.
 
-### onenote
+To follow the MIDI activities using the GoBadge, [click here](./gobadge.md)
 
-This introductory MIDI controller sends only a single note. It is designed to connect to some conductive items such as a banana or other piece of fruit.
-
-- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (labeled X) using a black or brown jumper cable.
-
-- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (labeled W) using a red jumper cable.
-
-- Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
-
-- Connect a yellow cable from the pin A on the MakeyBoard to pin D12 on the Arduino.
-
-- Connect a red alligator cable to the connector A and then plug in into your piece of fruit.
-
-To build/flash the `onenote` example on Arduino Nano RP2040:
-
-        tinygo flash -target nano-rp2040 ./onenote/
-
-Touch the black ground cable, and then also touch the piece of fruit.
-
-This should send MIDI messages that can trigger sounds on your computer by using your Arduino MIDI controller.
-
-Launch one of the online synths. You should be able to use your new custom MIDI controller to make music.
-
-Have fun!
-
-### chorder
-
-This MIDI controller sends entire chords with a single touch. It uses the exact same wiring setup as the `onenote` program.
-
-Each time you touch the controller, it will play the next chord in the programmed chord progression.
-
-To build/flash the `chorder` program on Arduino Nano RP2040:
-
-        tinygo flash -target nano-rp2040 ./chorder/
-
-Touch the black ground cable, and then also touch the piece of fruit.
-
-This should also send MIDI messages that can trigger sounds on your computer by using your Arduino MIDI controller.
-
-Launch one of the online synths. You should be able to use your new custom MIDI controller to make music.
-
-Have fun!
-
-### foamaphone
-
-This MIDI controller sends four different note. It is designed to connect to some conductive foil attached to anything non-conductive, such as a piece of paper.
-
-- Connect one of the "Ground" pins on the Arduino to the MakeyBoard ground pin (labeled X) using a black or brown jumper cable.
-
-- Connect the "3.3V" pin on the Arduino to the MakeyBoard power pin (labeled W) using a red jumper cable.
-
-- Connect a black alligator cable to the MakeyBoard ground rail (-). You will hold this cable to serve as the ground.
-
-- Connect a cable from the pin A on the MakeyBoard to pin D2 on the Arduino.
-
-- Connect a cable from the pin D on the MakeyBoard to pin D4 on the Arduino.
-
-- Connect a cable from the pin G on the MakeyBoard to pin D6 on the Arduino.
-
-- Connect a cable from the pin J on the MakeyBoard to pin D8 on the Arduino.
-
-- Connect an alligator cable to the connector A and then connect to one isolated piece of copper foil, or anything else that conducts.
-
-- Connect an alligator cable to the connector D and then connect to one isolated piece of copper foil, or anything else that conducts. Make sure you connect it to something else other than what the first cable is connected to.
-
-- Connect an alligator cable to connector G, keeping it separate from A or D.
-
-- Finally, do the same with the fourth alligator cable and connector J.
-
-To build/flash the `foamaphone` program on Arduino Nano RP2040:
-
-        tinygo flash -target nano-rp2040 ./foamaphone/
+To follow the MIDI activities using the Arduino RP2040 Nano, [click here](./arduino.md)
