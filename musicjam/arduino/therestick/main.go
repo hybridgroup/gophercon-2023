@@ -10,6 +10,8 @@ import (
 var (
 	led    = machine.LED
 	button = machine.D12
+	stickX = machine.ADC{machine.A2}
+	stickY = machine.ADC{machine.A3}
 
 	note = midi.C3
 
@@ -21,8 +23,12 @@ var (
 )
 
 func main() {
+	machine.InitADC()
+
 	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	button.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
+	stickX.Configure(machine.ADCConfig{})
+	stickY.Configure(machine.ADCConfig{})
 
 	for {
 		switch {
@@ -33,6 +39,19 @@ func main() {
 		case release():
 			led.Low()
 			midi.Port().NoteOff(midicable, midichannel, note, velocity)
+		}
+
+		// x axis for modulation, y axis for pitch bend
+		x, y := stickX.Get(), stickY.Get()
+
+		if pressed {
+			// scale y to range 0x0 thru 0x3FFF
+			sy := 0x3FFF * uint32(y) / 0xFFFF
+			midi.Port().PitchBend(midicable, midichannel, uint16(sy))
+
+			// scale x to range 0x0 thru 0xff
+			sx := 0xFF * uint32(x) / 0xFFFF
+			midi.Port().SendCC(midicable, midichannel, 1, uint8(sx))
 		}
 
 		time.Sleep(time.Millisecond * 100)
