@@ -10,15 +10,16 @@ import (
 var (
 	led    = machine.LED
 	button = machine.D12
-	
-	keyOfMusic = midi.C4
-	midichannel uint8 = 0 // MIDI channels are 0-15 e.g. 1-16
+
+	midicable   uint8 = 0
+	midichannel uint8 = 1
+	velocity    uint8 = 0x40
 
 	chords = []struct {
-		name string
+		name  string
 		notes []midi.Note
 	}{
-		{name: "C ", notes: []midi.Note{midi.C4, midi.E4, midi.G4}},
+		{name: "C ", notes: []midi.Note{midi.C3, midi.E3, midi.G3}},
 		{name: "G ", notes: []midi.Note{midi.G3, midi.B3, midi.D4}},
 		{name: "Am", notes: []midi.Note{midi.A3, midi.C4, midi.E4}},
 		{name: "F ", notes: []midi.Note{midi.F3, midi.A3, midi.C4}},
@@ -37,13 +38,13 @@ func main() {
 		switch {
 		case press():
 			led.High()
-			for _, c := range chords[index].notes {
-				midi.Port().NoteOn(0, 0, c, 0x40)
+			for _, note := range chords[index].notes {
+				midi.Port().NoteOn(midicable, midichannel, note, velocity)
 			}
 		case release():
 			led.Low()
-			for _, c := range chords[index].notes {
-				midi.Port().NoteOff(0, 0, c, 0x40)
+			for _, note := range chords[index].notes {
+				midi.Port().NoteOff(midicable, midichannel, note, velocity)
 			}
 			index = (index + 1) % len(chords)
 		}

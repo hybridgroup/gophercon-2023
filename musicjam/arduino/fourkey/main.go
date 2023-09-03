@@ -8,20 +8,22 @@ import (
 )
 
 var (
-	led    = machine.LED
+	led                 = machine.LED
 	buttonC machine.Pin = machine.D12
 	buttonE machine.Pin = machine.D11
 	buttonG machine.Pin = machine.D10
 	buttonB machine.Pin = machine.D9
 
-	keys = []key {
-		{pin: buttonC, note: midi.C4},
-		{pin: buttonE, note: midi.E4},
-		{pin: buttonG, note: midi.G4},
-		{pin: buttonB, note: midi.B4},
+	keys = []key{
+		{pin: buttonC, note: midi.C3},
+		{pin: buttonE, note: midi.E3},
+		{pin: buttonG, note: midi.G3},
+		{pin: buttonB, note: midi.B3},
 	}
-	
-	midichannel uint8 = 0 // MIDI channels are 0-15 e.g. 1-16
+
+	midicable   uint8 = 0
+	midichannel uint8 = 1
+	velocity    uint8 = 0x40
 )
 
 func main() {
@@ -43,20 +45,20 @@ func handleKeys() {
 		switch {
 		case keys[i].press():
 			led.High()
-			midi.Port().NoteOn(0, midichannel, keys[i].note, 50)
+			midi.Port().NoteOn(midicable, midichannel, keys[i].note, velocity)
 			keys[i].pressed = true
 
 		case keys[i].release():
 			led.Low()
-			midi.Port().NoteOff(0, midichannel, keys[i].note, 50)
+			midi.Port().NoteOff(midicable, midichannel, keys[i].note, velocity)
 			keys[i].pressed = false
 		}
 	}
 }
 
 type key struct {
-	pin machine.Pin
-	note midi.Note
+	pin     machine.Pin
+	note    midi.Note
 	pressed bool
 }
 
@@ -64,7 +66,7 @@ func (k key) press() bool {
 	if !k.pin.Get() && !k.pressed {
 		return true
 	}
-	return false	
+	return false
 }
 
 func (k key) release() bool {
