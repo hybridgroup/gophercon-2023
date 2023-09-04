@@ -45,13 +45,13 @@ func main() {
 		x, y := stickX.Get(), stickY.Get()
 
 		if pressed {
+			// scale x to range 0x0 thru 0xff
+			sx := 0xFF * uint32(x) / 0xFFFF
+			midi.Port().ControlChange(midicable, midichannel, midi.CCModulationWheel, uint8(sx))
+
 			// scale y to range 0x0 thru 0x3FFF
 			sy := 0x3FFF * uint32(y) / 0xFFFF
 			midi.Port().PitchBend(midicable, midichannel, uint16(sy))
-
-			// scale x to range 0x0 thru 0xff
-			sx := 0xFF * uint32(x) / 0xFFFF
-			midi.Port().SendCC(midicable, midichannel, 1, uint8(sx))
 		}
 
 		time.Sleep(time.Millisecond * 100)
