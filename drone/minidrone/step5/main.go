@@ -24,20 +24,8 @@ var leftX, leftY, rightX, rightY atomic.Value
 const offset = 32767.0
 
 func main() {
-	// configLocation will get set at runtime based on OS
-	var configLocation string
-
-	switch runtime.GOOS {
-	case "darwin":
-		configLocation = "./joystick/configs/dualshock3.json"
-	case "linux", "windows":
-		configLocation = "dualshock3"
-	default:
-		fmt.Sprintf("Unsupported OS: %s", runtime.GOOS)
-	}
-
-	joystickAdaptor := joystick.NewAdaptor()
-	stick := joystick.NewDriver(joystickAdaptor, configLocation)
+	joystickAdaptor := joystick.NewAdaptor(0)
+	stick := joystick.NewDriver(joystickAdaptor, "dualshock3")
 
 	droneAdaptor := ble.NewClientAdaptor(os.Args[1])
 	drone := minidrone.NewDriver(droneAdaptor)
