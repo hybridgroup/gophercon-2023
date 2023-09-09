@@ -24,20 +24,8 @@ var leftX, leftY, rightX, rightY atomic.Value
 const offset = 32767.0
 
 func main() {
-	// configLocation will get set at runtime based on OS
-	var configLocation string
-
-	switch runtime.GOOS {
-	case "darwin":
-		configLocation = "./joystick/configs/dualshock3.json"
-	case "linux", "windows":
-		configLocation = "dualshock3"
-	default:
-		fmt.Sprintf("Unsupported OS: %s", runtime.GOOS)
-	}
-
-	var joystickAdaptor = joystick.NewAdaptor()
-	var stick = joystick.NewDriver(joystickAdaptor, configLocation)
+	var joystickAdaptor = joystick.NewAdaptor(0)
+	var stick = joystick.NewDriver(joystickAdaptor, "dualshock3")
 	var currentFlightData *tello.FlightData
 
 	work := func() {

@@ -103,31 +103,6 @@ Now it is time for free flight, controlled by you, the human pilot. Plug in the 
 
 IMPORTANT NOTE: you must press the "P3" button when your program first runs for the "clone" joysticks we are using to fully turn on.
 
-**macOS**
-
-`brew install sdl2{,_image,_mixer,_ttf,_gfx} pkg-config`
-
-`go run step5/main.go`
-
-**Linux**
-
-`sudo apt-get install libsdl2-dev`
-
-`go run step5/main.go`
-
-**Windows**:
-
-Windows might not be working with SDL2 at the moment.
-
-1. Install mingw-w64 from [Mingw-builds](https://github.com/niXman/mingw-builds-binaries/releases). A 7z archive extractor software might be needed which can be downloaded [here](https://www.7-zip.org/download.html). In this example, we extract the content, which is `mingw64`, into `C:\`.
-2. Download and install `SDL2-devel-[version]-mingw.zip` files from https://github.com/libsdl-org/SDL/releases.
-    * Extract the SDL2 folder from the archive using a tool like [7zip](http://7-zip.org)
-    * Inside the extracted SDL2 folder, copy the `i686-w64-mingw32` and/or `x86_64-w64-mingw32` into mingw64 folder e.g. `C:\mingw64`
-3. Setup `Path` environment variable
-    * Put mingw-w64 binaries location into system `Path` environment variable (e.g. `C:\mingw64\bin`)
-4. Close and open terminal again so the new `Path` environment variable takes effect. Now we should be able to run `go build` inside the project directory.
-5. Download and install SDL2 runtime libraries from https://github.com/libsdl-org/SDL/releases. Extract and copy the `.dll` file into the project directory. After that, the program should become runnable.
-
 `go run step5/main.go`
 
 <hr>
