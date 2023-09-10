@@ -50,7 +50,9 @@ https://www.websynths.com/microtonal/
 
 https://www.gsn-lib.org/apps/cardboardsynth/index.html
 
-https://www.webaudiomodules.org/wamsynths/webcz101/
+https://g200kg.github.io/webaudio-tinysynth/soundedit.html
+
+https://signal.vercel.app/
 
 https://juno-106.js.org/
 
@@ -58,18 +60,22 @@ https://virtualpiano.eu/
 
 https://experiments.withgoogle.com/ai/sound-maker/view/
 
-## Hardware Controller
+## Hardware Controllers
 
-If you have a GoBadge you can use it as your MIDI controller.
+A hardware MIDI controller lets you control the virtual instruments running on your computer.
 
-You can also use an Arduino RP2040 board along with one of the button kits that we have brought with us.
+Each of the TinyGo programs for the MIDI Controller is intended to run directly on the external hardware to send MIDI commands via the USB interface to your computer.
 
-All of the musical activities can be done with either hardware setup.
+All of the musical activities can be done with either the GoBadge or with the Arduino RP2040 Nano.
 
-Each of the TinyGo programs for the MIDI Controller is intended to run directly on the hardware to send MIDI commands via the USB interface to your computer.
+### GoBadge
 
-There are several different kinds of controllers in this folder, which are programs you flash onto your board and then by connecting the right hardware can use it to control the virtual instruments running on your computer.
+If you have a GoBadge you can use it as your MIDI controller. Check with us for some accessories you will need.
 
 To follow the MIDI activities using the GoBadge, [click here](./gobadge.md)
+
+### Arduino RP2040 Nano
+
+You can also use a Arduino RP2040 board along with one of the button kits that we have brought with us.
 
 To follow the MIDI activities using the Arduino RP2040 Nano, [click here](./arduino.md)
