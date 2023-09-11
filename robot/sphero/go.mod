@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gophercon-2022/sphero
+module github.com/hybridgroup/goperhcon-2023/sphero
 
 go 1.19
 

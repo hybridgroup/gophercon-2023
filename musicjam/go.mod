@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gophercon-2022/musicjam
+module github.com/hybridgroup/goperhcon-2023/musicjam
 
 go 1.18
 

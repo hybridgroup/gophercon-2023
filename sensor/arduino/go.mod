@@ -1,4 +1,4 @@
-module github.com/hybridgroup/gophercon-2022/sensor/arduino
+module github.com/hybridgroup/goperhcon-2023/sensor/arduino
 
 go 1.18
 
