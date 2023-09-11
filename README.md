@@ -39,7 +39,7 @@ https://tinygo.org/getting-started/install/
 
 If you are one of the very fortunate individuals to have received a GoBadge, it is in fact yours to keep!
 
-Go to https://gopherbadge.com/ for more info.
+Go to https://github.com/tinygo-org/gobadge for more info.
 
 ### TinyGo IoT sensors
 
@@ -93,15 +93,15 @@ Make your own electronic musical instruments using TinyGo and the Raspberry Pi N
 
 Thanks to the USB-MIDI support, you can turn your board into a tiny digital musical instrument controller.
 
-Add some copper foil tape and high-ohm resistors when we say become part of the music we mean it!
+Add buttons, sliders, a joystick, and when we say become part of the music we mean it!
 
-We can make beautiful music together, just go to [./musicjam/](./musicjam/).
+Let's make beautiful music together, just go to [./musicjam/](./musicjam/).
 
 ### Sphero Ollie robots
 
 ![Sphero Ollie](./images/ollie.jpg)
 
-Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon EU! These fast Bluetooth controlled robotic toys have long been a Go programmer fan favorite.
+Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon! These fast Bluetooth controlled robotic toys have long been a Go programmer fan favorite.
 
 There are a few of these cylindrical robots to help satisfy your need for speed.
 
