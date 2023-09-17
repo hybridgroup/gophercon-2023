@@ -10,28 +10,7 @@ https://gophercon.com/
 
 ## Installation
 
-### Clone this repo
-
-First use git to clone this repo to your local machine:
-
-```
-git clone https://github.com/hybridgroup/gophercon-2023.git
-cd gophercon-2023
-```
-
-### Install Go 1.21
-
-If somehow you have not installed Go 1.21 on your computer already, you can download it here:
-
-https://go.dev/dl/
-
-Now you are ready to install TinyGo.
-
-### Install TinyGo
-
-You will need to install TinyGo 0.29.0 in order to do today's activities.
-
-https://tinygo.org/getting-started/install/
+Please read our [installation instructions here](./INSTALL.md).
 
 ## Activities
 
@@ -103,24 +82,7 @@ Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 
 ## Bounties
 
-We have some other cool giveaways as bounties and prizes.
-
-### Xiao ESP32-C3
-
-We have 2 Xiao ESP32-C3 development boards, a new RISCV microcontroller with onboard WiFi. We need help adding the code to support the built-in serial interface.
-
-### Raspberry Pi Pico W
-
-We've got 2 Raspberry Pi Pico W boards, the board using the RP2040 microcontroller with an onboard WiFi chip.
-
-### Sphero Ollie
-
-Take home your very own Sphero Ollie high speed Bluetooth controlled robot. All you need to do is help us implement the calibration code.
-
-The JS library shows what needs to be done:
-https://github.com/sphero-inc/sphero.js/blob/master/lib/devices/custom.js#L288-L343
-
-Submit a PR adding the needed code to https://github.com/hybridgroup/gobot/blob/dev/platforms/sphero/sphero_driver.go and claim it! 
+We have some additional bounties and prizes, [you can see more information here](./BOUNTIES.md).
 
 ## License
 
