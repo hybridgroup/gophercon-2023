@@ -6,7 +6,7 @@ The is the repository for the hardware hack session at Gophercon 2023.
 
 https://gophercon.com/
 
-### Please return all loaner equipment when you are finished for the next person. Thank you!
+### If you received a GoBadge, it is yours to keep. Please return all other equipment when you are finished for the next person. Thank you!
 
 ## Installation
 
@@ -79,14 +79,6 @@ Post in-flight videos using hashtag #gophercon
 
 Ready for takeoff? Go to [./drone/minidrone/](./drone/minidrone/).
 
-### Gopherbot
-
-We have four Gopherbots for everyone to take turns playing with.
-
-Gopherbot is a robotic gopher plushie that can be programmed using TinyGo.
-
-Check out https://github.com/hybridgroup/gopherbot for more info.
-
 ### TinyGo Music Jam
 
 ![Controller mk2](./images/music-mk2.jpg)
@@ -108,6 +100,27 @@ Turns out we had a few unopened Sphero Ollie robots that we found just in time f
 There are a few of these cylindrical robots to help satisfy your need for speed.
 
 Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
+
+## Bounties
+
+We have some other cool giveaways as bounties and prizes.
+
+### Xiao ESP32-C3
+
+We have 2 Xiao ESP32-C3 development boards, a new RISCV microcontroller with onboard WiFi. We need help adding the code to support the built-in serial interface.
+
+### Raspberry Pi Pico W
+
+We've got 2 Raspberry Pi Pico W boards, the board using the RP2040 microcontroller with an onboard WiFi chip.
+
+### Sphero Ollie
+
+Take home your very own Sphero Ollie high speed Bluetooth controlled robot. All you need to do is help us implement the calibration code.
+
+The JS library shows what needs to be done:
+https://github.com/sphero-inc/sphero.js/blob/master/lib/devices/custom.js#L288-L343
+
+Submit a PR adding the needed code to https://github.com/hybridgroup/gobot/blob/dev/platforms/sphero/sphero_driver.go and claim it! 
 
 ## License
 
