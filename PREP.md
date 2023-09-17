@@ -8,46 +8,46 @@ Please add whatever checklist items needed here...
 
 ### Tello
 
-- [X] batteries
-- [X] chargers
-- [X] test joysticks
-- [X] verify video
+- [ ] batteries
+- [ ] chargers
+- [ ] test joysticks
+- [ ] verify video
 - [ ] flightbadge
 - [ ] OS check
-    - [X] Linux
+    - [ ] Linux
     - [ ] macOS
     - [ ] Windows
 
 ### Minidrone
 
-- [X] batteries
-- [X] chargers
-- [X] complete steps 2-5+
-- [X] test joysticks
+- [ ] batteries
+- [ ] chargers
+- [ ] complete steps 2-5+
+- [ ] test joysticks
 - [ ] flightbadge
 - [ ] OS check
-    - [X] Linux
+    - [ ] Linux
     - [ ] macOS
     - [ ] Windows
 
 ## Music Jam
 
-- [X] update code
-- [X] organize parts kits
-- [X] dupont M2F cables
-- [X] sound cables
+- [ ] update code
+- [ ] organize parts kits
+- [ ] dupont M2F cables
+- [ ] sound cables
 - [ ] OS check
-    - [X] Linux
+    - [ ] Linux
     - [ ] macOS
     - [ ] Windows
 
 ## Arduino IoT
 
-- [X] organize parts kits
-- [X] update for latest drivers wifinina
-- [X] add apconnect tool
+- [ ] organize parts kits
+- [ ] update for latest drivers wifinina
+- [ ] add apconnect tool
 - [ ] OS check
-    - [X] Linux
+    - [ ] Linux
     - [ ] macOS
     - [ ] Windows
 
@@ -55,17 +55,17 @@ Please add whatever checklist items needed here...
 
 ### Spheros
 
-- [X] check batteries
-- [X] USB charger
-- [X] OS check
-    - [X] Linux
-    - [X] macOS
-    - [X] Windows
+- [ ] check batteries
+- [ ] USB charger
+- [ ] OS check
+    - [ ] Linux
+    - [ ] macOS
+    - [ ] Windows
 
 ### Gopherbots
 
-- [X] batteries
-- [X] cables
+- [ ] batteries
+- [ ] cables
 - [ ] add bluetooth tutorial/examples
 
 ## Raspberry Pi "proxies"

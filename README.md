@@ -35,19 +35,23 @@ https://tinygo.org/getting-started/install/
 
 ### GoBadge Hacking
 
+![GoBadge](./images/gobadges.jpg)
+
 If you are one of the very fortunate individuals to have received a GoBadge, it is in fact yours to keep!
 
 Go to https://gopherbadge.com/ for more info.
 
 ### TinyGo IoT sensors
 
-We have some Arduino Nano RP2040 Connect IoT microcontroller boards for each person to use for the activity.
+![Arduino Nano RP2040](./sensor/arduino/assets/step6.jpg)
+
+Looking for the true "parts experience"? Got you covered! We have brought some Arduino Nano RP2040 Connect IoT microcontroller boards for each person to use for the activity.
 
 https://store.arduino.cc/collections/boards/products/arduino-nano-rp2040-connect
 
 These can be programmed using TinyGo.
 
-There are 15 Grove sensor kits that you can use for the activity.
+There are some Grove sensor kits that you can use for the activity.
 
 Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get started.
 
@@ -57,9 +61,9 @@ Ready to try this out? Go to [./sensor/arduino/](./sensor/arduino/) to get start
 
 ![Tello](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ryze_Tello.jpg/320px-Ryze_Tello.jpg)
 
-We have three DJI Tello drones for your Go-powered flying activities.
+We have brought some DJI Tello drones for your Go-powered flying activities.
 
-In additional to these drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
+In additional to the drones to be to be coded/flown, we also have Dualshock3-clone controllers for flight control. Post your awesome videos using hashtag #gophercon
 
 Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
@@ -67,7 +71,7 @@ Want to get airborne? Go to [./drone/tello/](./drone/tello/).
 
 ![Parrot Minidrone](https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Rolling_Spider.jpg/320px-Rolling_Spider.jpg)
 
-We have three Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
+We have Parrot Minidrones you can fly with Go code to control them using their built-in Bluetooth API.
 
 Post in-flight videos using hashtag #gophercon
 
@@ -83,7 +87,7 @@ Check out https://github.com/hybridgroup/gopherbot for more info.
 
 ### TinyGo Music Jam
 
-![MakeyBoard](./images/makeyboard.jpg)
+![Controller mk2](./images/music-mk2.jpg)
 
 Make your own electronic musical instruments using TinyGo and the Raspberry Pi Nano boards.
 
@@ -94,12 +98,12 @@ Add some copper foil tape and high-ohm resistors when we say become part of the 
 We can make beautiful music together, just go to [./musicjam/](./musicjam/).
 
 ### Sphero Ollie robots
-![Sphero Ollie](./images/ollie.jpg)
 
+![Sphero Ollie](./images/ollie.jpg)
 
 Turns out we had a few unopened Sphero Ollie robots that we found just in time for Gophercon EU! These fast Bluetooth controlled robotic toys have long been a Go programmer fan favorite.
 
-There are 4 Sphero Ollie robots to help satisfy your need for speed.
+There are a few of these cylindrical robots to help satisfy your need for speed.
 
 Want to take one for a spin? Go to [./robot/sphero/](./robot/sphero/).
 
