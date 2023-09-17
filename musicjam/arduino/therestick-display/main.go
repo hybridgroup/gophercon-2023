@@ -52,8 +52,8 @@ func main() {
 			// x axis for modulation, y axis for pitch bend
 			x, y := stickX.Get(), stickY.Get()
 
-			// scale x to range 0x0 thru 0xff
-			sx = 0xFF * uint32(x) / 0xFFFF
+			// scale x to range 0-127
+			sx = 0x7F * uint32(x) / 0xFFFF
 			midi.Port().ControlChange(midicable, midichannel, midi.CCModulationWheel, uint8(sx))
 
 			// scale y to range 0x0 thru 0x3FFF
