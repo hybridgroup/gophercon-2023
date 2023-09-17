@@ -24,8 +24,8 @@ var leftX, leftY, rightX, rightY atomic.Value
 const offset = 32767.0
 
 func main() {
-	var joystickAdaptor = joystick.NewAdaptor(0)
-	var stick = joystick.NewDriver(joystickAdaptor, "dualshock3")
+	var joystickAdaptor = joystick.NewAdaptor("0")
+	var stick = joystick.NewDriver(joystickAdaptor, joystick.Dualshock3)
 	var currentFlightData *tello.FlightData
 
 	work := func() {
