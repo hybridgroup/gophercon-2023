@@ -53,6 +53,7 @@ func main() {
 	buttons.Configure()
 
 	go handleKeys()
+	go handleDisplay()
 
 	for {
 		playArpeggio()
