@@ -132,22 +132,22 @@ func configureStickEvents(stick *joystick.Driver) {
 	})
 
 	stick.On(joystick.LeftX, func(data interface{}) {
-		val := float64(data.(int16))
+		val := float64(data.(int))
 		leftX.Store(val)
 	})
 
 	stick.On(joystick.LeftY, func(data interface{}) {
-		val := float64(data.(int16))
+		val := float64(data.(int))
 		leftY.Store(val)
 	})
 
 	stick.On(joystick.RightX, func(data interface{}) {
-		val := float64(data.(int16))
+		val := float64(data.(int))
 		rightX.Store(val)
 	})
 
 	stick.On(joystick.RightY, func(data interface{}) {
-		val := float64(data.(int16))
+		val := float64(data.(int))
 		rightY.Store(val)
 	})
 }

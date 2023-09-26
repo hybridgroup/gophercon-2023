@@ -95,7 +95,7 @@ This is the same functionality as step04, but instead of using Metal Gobot now w
 
 Now it is time for free flight, controlled by you, the human pilot. Plug in the DS4 or DS3 controller to your computer. The controls are as follows:
 
-* Triangle    - Takeoff
+* Start    - Takeoff
 * X           - Land
 * Left stick  - altitude
 * Right stick - direction
