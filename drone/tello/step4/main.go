@@ -38,7 +38,7 @@ func main() {
 
 		if time.Since(start) > 2*time.Second {
 			flightPattern.Do(func() {
-				go flyWithFlip()
+				go flyWithFlips()
 			})
 		}
 
