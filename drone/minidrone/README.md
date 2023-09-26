@@ -85,7 +85,7 @@ This is the same functionality as step04, but instead of using Metal Gobot now w
 
 ### step05/main.go
 
-Now it is time for free flight, controlled by you, the human pilot. Plug in the DS3 controller to your computer. The controls are as follows:
+Now it is time for free flight, controlled by you, the human pilot. Plug in the DS4 or DS3 controller to your computer. The controls are as follows:
 
 * Triangle    - Takeoff
 * X           - Land
@@ -93,7 +93,7 @@ Now it is time for free flight, controlled by you, the human pilot. Plug in the 
 * Right stick - direction
 
 
-IMPORTANT NOTE: you must press the "P3" button when your program first runs for the "clone" joysticks we are using to fully turn on.
+IMPORTANT NOTE: you must press the "P3" button when your program first runs for the "clone" DS3 joysticks we are using to fully turn on.
 
 **macOS**
 

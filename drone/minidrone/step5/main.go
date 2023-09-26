@@ -6,8 +6,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	"runtime"
-
 	gobot "gobot.io/x/gobot/v2"
 	"gobot.io/x/gobot/v2/platforms/ble"
 	"gobot.io/x/gobot/v2/platforms/joystick"
@@ -25,7 +23,7 @@ const offset = 32767.0
 
 func main() {
 	joystickAdaptor := joystick.NewAdaptor("0")
-	stick := joystick.NewDriver(joystickAdaptor, joystick.Dualshock3)
+	stick := joystick.NewDriver(joystickAdaptor, joystick.Dualshock4)
 
 	droneAdaptor := ble.NewClientAdaptor(os.Args[1])
 	drone := minidrone.NewDriver(droneAdaptor)
