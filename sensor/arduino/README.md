@@ -15,7 +15,7 @@ Just for your information, the TinyGo drivers that let you connect to sensors, d
 
 ## Connecting the Arduino Nano RP2040 Connect to your computer
 
-<img src="https://docs.arduino.cc/static/8b9e4e17c1e1afa836057c5ba87c27c9/2f891/pinout.png" alt="Arduino Nano RP2040 Connect" width="600"/>
+<img src="./assets/nano-rp2040-connect-pins.png" alt="Arduino Nano RP2040 Connect" width="500"/>
 
 Plug the Arduino Nano RP2040 Connect into your computer using a USB cable. There may be one provided in your starter kit.
 
